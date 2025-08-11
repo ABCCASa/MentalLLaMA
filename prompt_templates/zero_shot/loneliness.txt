@@ -1,0 +1,4 @@
+Consider this post: "[post]"
+Question: Does the poster suffer from loneliness?
+Options: True / False
+Answer:

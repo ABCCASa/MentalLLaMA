@@ -1,0 +1,10 @@
+You will be presented with a post that possibly shows mental disorders, and you need to identify the type of the mental disorder
+The final answer should select from: No mental disorder, Depression, Suicide or self-harm, PTSD
+
+Here is a example:
+Post: I didn’t kill myself bc of this song pic.twitter.com/kffmJTpubz
+Response: Let's think step by step. The use of the phrase "I didn’t kill myself" immediately suggests that the person is struggling with suicidal...
+Answer: Suicide or self-harm
+
+Post: [post]
+Response: Let's think step by step.

@@ -1,0 +1,13 @@
+You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: [post]
+Aspect: [aspect]
+Response: Let's think step by step.

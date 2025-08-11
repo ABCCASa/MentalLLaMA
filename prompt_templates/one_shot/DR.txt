@@ -1,0 +1,10 @@
+You will be presented with a post, and you need to identify whether the post suffer from depression.
+The final answer should select from: True, False
+
+Here is a example:
+Post: How to avoid a relapse? I've been having a particularly rough year...
+Response: Let's think step by step. The post displays a significant amount of emotional distress, including...
+Answer: True
+
+Post: [post]
+Response: Let's think step by step.

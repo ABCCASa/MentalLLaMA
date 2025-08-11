@@ -1,0 +1,13 @@
+You will be presented with a post, and you need to identify whether the wellness dimension of given aspect exists in the post according to Dunn’s model of psychological wellness.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: I question my purpose daily. Will I ever find the "one" for me? This spiral of emotions I deal with on a daily basis...
+Aspect: spiritual
+Response: Let's think step by step. In the post, the individual expresses their search for meaning and purpose in their existence by questioning...
+Answer: True
+
+Post: [post]
+Aspect: [aspect]
+Response: Let's think step by step.

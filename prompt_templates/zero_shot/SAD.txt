@@ -1,0 +1,4 @@
+Consider this post: "[post]"
+Question: What is the stress cause of this post?
+Options: school / financial problem / family issues / social relationships / work / health issues / emotional turmoil / everyday decision making / other causes
+Answer:

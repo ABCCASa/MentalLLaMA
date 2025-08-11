@@ -1,0 +1,10 @@
+You will be presented with a post that possibly shows mental disorders, and you need to identify what mental disorder symptoms does this post show.
+The final answer should select from: No mental disorder, Suicide, Depression, Anxiety, Bipolar.
+
+Here is a example:
+Post: Suicide, but won’t do it. Just need someone to talk to me.
+Response: Let's think step by step. The poster is expressing frustration and disappointment with someone who asked for help but did not properly prepare for it...
+Answer: Suicide
+
+Post: [post]
+Response: Let's think step by step.

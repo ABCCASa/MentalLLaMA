@@ -1,0 +1,5 @@
+Consider this post: "[post]"
+Question: What mental disorder cause does this post show?
+Options: none / bias or abuse / jobs and career / medication / relationship / alienation
+
+Answer:

@@ -1,0 +1,4 @@
+Consider this post: "[post]"
+Question: What mental disorder symptoms does this post show?
+Options: no mental disorder / suicide / depression / anxiety / bipolar
+Answer:

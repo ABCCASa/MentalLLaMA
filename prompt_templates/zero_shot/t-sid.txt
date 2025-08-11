@@ -1,0 +1,4 @@
+Consider this post: "[post]"
+Question: What mental disorder does this post show?
+Options: no mental disorder / depression / suicide or self-harm / ptsd
+Answer:
