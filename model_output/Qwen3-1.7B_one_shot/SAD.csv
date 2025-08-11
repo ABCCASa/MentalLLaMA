@@ -1,0 +1,234 @@
+query,label,response
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes
+
+Here is a example:
+Post: I have been wanting to find another job for some time now
+Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
+Answer: Work
+
+Post: how the coronavirus could damage the US economy
+Response: Let's think step by step.",financial problem,"<think>
+Okay, let's see. The user provided a post: ""how the coronavirus could damage the US economy"". I need to figure out the cause of the stress from this post.
+
+First, the options are School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes. 
+
+The post is about the coronavirus and its economic impact. The main topic here is economic concerns. The user is likely worried about the economy because of the pandemic. But the options include Work, Financial problem, etc. 
+
+The post doesn't mention any specific job-related stress, but it's about the economy. However, the options include ""Work"" as a possible cause. Maybe the stress is related to work because the economy is affected by work. Alternatively, if the post is about the economy in general, maybe it's a financial problem? But the post is more about the economy's impact, not directly financial issues. 
+
+Wait, the user is asking for the cause of stress. If the post is about the coronavirus affecting the economy, the stress could be related to work if the economy is bad, leading to job insecurity. Or maybe financial problems if the economy is down, leading to financial stress. But the post itself is about the economy's potential damage, not directly stating financial issues. 
+
+Alternatively, the cause could be ""Work"" because the economy's health affects work. But I need to check the options again. The example given was ""I have been wanting to find another job"" leading to ""Work"". So maybe here, the post is about the economy, which is part of work. But the post is more about the economic impact, not the job search. 
+
+Hmm. The answer might be ""Work"" because the economy is part of work. But I'm not entirely sure. Alternatively, ""Financial problem"" if the economic damage leads to financial issues. But the post doesn't mention financial problems directly. It's more about the economy's state. 
+
+Wait, the options include ""Health issues"" but the post is about the economy. So maybe ""Work"" is the answer here. Because the economy is a part of work. So the stress is due to the work environment being affected by the pandemic. So the answer would be Work.
+</think>
+
+Let's think step by step. The post discusses the potential economic impact of the coronavirus, which is a broader societal issue. While the focus is on the economy, the stress likely stems from the uncertainty and disruption caused by the pandemic, which can affect work, employment, and financial stability. However, the post itself does not explicitly mention job search or financial struggles. The most direct connection is to **Work**, as the economy's health directly influences job markets and employment opportunities. 
+
+Answer: Work"
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes
+
+Here is a example:
+Post: I have been wanting to find another job for some time now
+Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
+Answer: Work
+
+Post: work in general and searching the real estate market.
+Response: Let's think step by step.",work,"<think>
+Okay, let's tackle this. The user provided a post: ""work in general and searching the real estate market."" They need to determine the cause of stress from the options given.
+
+First, I need to parse the post. The key words here are ""work in general"" and ""searching the real estate market."" The mention of ""work in general"" suggests that the person is dealing with their job-related stress. However, the second part about the real estate market might be a red herring or a distraction. But the question is about the cause of stress, so I need to see which of the options fits best.
+
+The options are School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes. 
+
+The post mentions ""work in general,"" which directly points to the Work category. However, the second part about real estate might be a trick. But since the question is about the cause of stress, and the post explicitly mentions work, even if there's a mention of real estate, the primary cause is work. Unless the real estate part is a separate issue, but the post doesn't mention financial stress or other factors. 
+
+Wait, but maybe ""searching the real estate market"" could be related to financial issues? Like if someone is looking to buy a house, that could be a financial problem. But the post doesn't explicitly say that. It just says ""work in general and searching the real estate market."" So the main stressor is work. Unless the real estate part is a separate cause, but the answer should be based on the most direct mention. 
+
+So the answer would be Work. But let me check again. The example given in the problem had ""I have been wanting to find another job for some time now"" leading to Work. Similarly, here, the post mentions work in general, which is a direct indicator. The real estate part might be a distractor, but the main stressor is work. So the answer should be Work.
+</think>
+
+Let's think step by step. The post mentions ""work in general"" and ""searching the real estate market."" While the second part could hint at financial stress (e.g., real estate transactions often involve costs), the primary focus is on ""work in general,"" which directly indicates occupational stress. The mention of real estate is tangential and does not explicitly point to a specific cause of stress.  
+
+Answer: Work"
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes
+
+Here is a example:
+Post: I have been wanting to find another job for some time now
+Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
+Answer: Work
+
+Post: i have been wanting to find another job for some time now
+Response: Let's think step by step.",work,"<think>
+Okay, let's tackle this. The user provided a post that says, ""i have been wanting to find another job for some time now."" They need to identify the cause of the stress from the options given.
+
+First, I remember that the example response for the same post was ""Work"" because the post directly mentions wanting a new job, which is typically linked to work-related stress. Now, the current post is similar. The key points here are the mention of wanting another job and the time frame (""for some time now""). 
+
+I need to check the options again. The possible causes are School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes. 
+
+The post doesn't mention anything about financial difficulties, family problems, or health issues. It's specifically about wanting a new job, which is directly related to the Work category. Even though the post doesn't explicitly state that the job search is causing stress, the act of wanting to find another job is a common indicator of stress related to work. 
+
+I should make sure there's no other possible cause. For example, if the person was trying to find a job for a financial reason, but the post doesn't mention money. It's just about wanting a job, which is work-related. So the answer should be Work.
+</think>
+
+Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates a focus on employment-related stress, which is most directly linked to the **Work** category.  
+Answer: Work"
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes
+
+Here is a example:
+Post: I have been wanting to find another job for some time now
+Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
+Answer: Work
+
+Post: The usual stressor in my life.
+Response: Let's think step by step.",everyday decision making,"<think>
+Okay, let's tackle this. The user provided a post that says, ""The usual stressor in my life."" They want me to determine the cause of the stress from the given options: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+
+First, I need to analyze the post. The sentence is very brief: ""The usual stressor in my life."" The key here is that the post is stating the general stressor, but it's not specifying what the stressor is. The response example given earlier was ""Work"" because the post mentioned wanting to find another job, which points to Work as the cause.
+
+But in this case, the post is just stating that the usual stressor is in their life. It doesn't mention any specific cause. However, the options include ""Other causes"" as a possible answer. The problem is that the post doesn't provide enough information to determine the exact cause. The user might be testing if I can recognize that the post is too vague to assign a specific cause. 
+
+Looking at the options again, ""Other causes"" would be the correct choice here because the post doesn't specify the stressor. The original example had a specific mention of wanting a job, which clearly pointed to Work. But in this case, the post is too general. Therefore, the answer should be ""Other causes"" since there's no specific information to determine the exact cause.
+</think>
+
+Let's think step by step. The post states ""The usual stressor in my life,"" which is vague and does not specify the cause of the stress. It does not mention any particular issue, job, relationship, or health concern. The phrase ""usual stressor"" implies a general state of stress without identifying the specific source. Since no specific cause is provided, the most appropriate response is to select ""Other causes"" as the cause cannot be determined from the given information.  
+
+Answer: Other causes"
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes
+
+Here is a example:
+Post: I have been wanting to find another job for some time now
+Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
+Answer: Work
+
+Post: i have been very stressed out by all the bad drivers near my house.
+Response: Let's think step by step.",work,"<think>
+Okay, let's tackle this. The user provided a post: ""i have been very stressed out by all the bad drivers near my house."" I need to figure out the cause of the stress from this.
+
+First, the post mentions stress from bad drivers near the house. The possible causes are listed as School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+
+The key here is to match the stressor. The main issue is the bad drivers. The user is stressed because of these drivers. The cause is the environment around their home. The options include ""Other causes"" but maybe there's a more specific one. Let me check the options again. The options are School, Financial, Family, Social, Work, Health, Emotional turmoil, Everyday decision making, Other.
+
+The stress is caused by bad drivers, which is a physical or environmental factor. The closest option might be ""Other causes"" because none of the listed categories directly fit. However, ""Social relationships"" could be a possibility if the bad drivers are part of social interactions, but the post mentions drivers near the house, which is more about the physical environment. ""Health issues"" might not fit. ""Emotional turmoil"" is a possible outcome, but the cause is the drivers. ""Everyday decision making"" might not apply here. So, ""Other causes"" seems the best fit here. But wait, maybe ""Social relationships"" if the drivers are part of social interactions. But the post doesn't mention social interactions, just drivers. So I think ""Other causes"" is the answer.
+</think>
+
+Let's think step by step. The post mentions stress from ""bad drivers near my house,"" which is a physical environmental factor. None of the listed categories (School, Financial, Family, Social, Work, Health, Emotional turmoil, Everyday decision making) directly align with the cause of stress here. The stressor is external and specific to the physical environment (drivers), which falls under ""Other causes.""  
+
+Answer: Other causes"
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes
+
+Here is a example:
+Post: I have been wanting to find another job for some time now
+Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
+Answer: Work
+
+Post: In bad news my sister has tested positive for ovarian cancer..my family is devastated.
+Response: Let's think step by step.",family issues,"<think>
+Okay, let's see. The user provided a post: ""In bad news my sister has tested positive for ovarian cancer. My family is devastated."" And they want me to identify the cause of the stress from this post.
+
+First, I need to look at the key elements here. The main event is the sister being diagnosed with ovarian cancer. The response mentions that the family is devastated. Now, the options are School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+
+Ovarian cancer is a health issue, so that's a direct cause. The family's reaction is emotional, but the cause of the stress is the health problem. The options include Health issues, so that's a candidate. But let me check the other options. Family issues might be a possible cause, but the post specifically mentions the sister's diagnosis, which is a health issue. The family's devastation is the effect, not the cause. So the cause is Health issues. The answer should be Health issues.
+</think>
+
+Let's think step by step. The post explicitly mentions a family member being diagnosed with ovarian cancer, a serious health condition. The family's devastation is the emotional response to this diagnosis. The direct cause of stress is the health issue (ovarian cancer), not the family's reaction.  
+Answer: Health issues"
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes
+
+Here is a example:
+Post: I have been wanting to find another job for some time now
+Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
+Answer: Work
+
+Post: raising a  teenage girl  can be stressful
+Response: Let's think step by step.",financial problem,"<think>
+Okay, let's tackle this. The user provided a post: ""raising a teenage girl can be stressful."" I need to figure out the cause of the stress from this.
+
+First, the post mentions raising a teenage girl, which is a common source of stress. The options include School, Financial problem, Family issues, etc. 
+
+The key here is ""raising a teenage girl."" That sounds like a family-related issue. Family issues usually involve relationships with parents, siblings, or other family members. Raising a child, especially a teenager, is a common source of stress. 
+
+Looking at the options, ""Family issues"" is one of the choices. The other options like Work or School might be less direct. The post doesn't mention work, financial problems, or social relationships. It's specifically about the responsibility of raising a teenager, which falls under family. 
+
+So the answer should be Family issues.
+</think>
+
+Let's think step by step. The post explicitly mentions raising a teenage girl, which is a family-related responsibility. This directly points to family issues as the cause of stress.  
+Answer: Family issues"
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes
+
+Here is a example:
+Post: I have been wanting to find another job for some time now
+Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
+Answer: Work
+
+Post: yeh, we talked for like 10 minutes but had to go cuz i had to finish work at starbucks.
+Response: Let's think step by step.",everyday decision making,"<think>
+Okay, let's tackle this. The user provided a post: ""yeh, we talked for like 10 minutes but had to go cuz i had to finish work at starbucks."" The task is to identify the cause of stress from the given options.
+
+First, I need to understand the content of the post. The person mentions talking for 10 minutes but had to leave because they had to finish work at Starbucks. So, the main point here is that they had to leave work early. 
+
+Now, the possible causes are School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes. 
+
+The key here is the mention of finishing work at Starbucks. That suggests that the person is working, and they had to leave work early. The stress might be related to their job or work responsibilities. The fact that they had to leave work implies that their work schedule was demanding, which could be a source of stress. 
+
+Looking at the options, ""Work"" is one of the choices. The post doesn't mention anything about financial issues, family problems, or other stressors. It's specifically about having to finish work, which is directly related to their job. 
+
+I should check if there's any other possible cause. For example, if the work was stressful, but the post doesn't mention any other stressors. The main point is the work-related reason for leaving early. So the answer should be Work.
+</think>
+
+Let's think step by step. The post mentions the person had to finish work at Starbucks, indicating a work-related obligation. The stress likely stems from the need to prioritize work over personal time, which is a common source of stress. The context does not point to financial, family, or other causes.  
+
+Answer: Work"
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes
+
+Here is a example:
+Post: I have been wanting to find another job for some time now
+Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
+Answer: Work
+
+Post: work, it has been a stressful week! hope it gets better
+Response: Let's think step by step.",work,"<think>
+Okay, let's see. The user provided a post: ""work, it has been a stressful week! hope it gets better"". The task is to identify the cause of the stress from the given options.
+
+First, I need to parse the post. The user mentions ""work"" and says it's been a stressful week. The key here is the mention of ""work"" and the stress related to it. The options include Work as a possible cause. The example given in the problem shows that when someone mentions wanting to find another job, the response is Work. So in this case, the post directly mentions ""work"" and talks about it being stressful. The answer should be Work. The other options like School, Financial problems, etc., aren't mentioned here. The post doesn't mention anything about family, health, or social issues. It's straightforward that the stress is due to work. So the correct answer should be Work.
+</think>
+
+Answer: Work"
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes
+
+Here is a example:
+Post: I have been wanting to find another job for some time now
+Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
+Answer: Work
+
+Post: It's so hard with school and stuff.
+Response: Let's think step by step.",school,"<think>
+Okay, let's see. The user provided a post that says, ""It's so hard with school and stuff."" I need to figure out the cause of the stress from this.
+
+First, the post mentions ""school and stuff."" The options are School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+
+The key here is ""school and stuff."" The word ""stuff"" is a bit vague, but it's commonly used to refer to school-related things. The person is talking about finding it hard with school, which suggests that their stress is related to their academic responsibilities. 
+
+Looking at the options, ""School"" is one of the choices. The other options like Work, Financial problem, etc., don't seem directly related here. The post doesn't mention anything about financial issues, family problems, or work-related stress. It's more about the difficulty in school. 
+
+So the most appropriate answer would be School. The user might be stressed because of academic pressures, maybe exams, assignments, or just the overall workload. The mention of ""stuff"" could be a general term for school-related tasks. 
+
+I don't see any other factors here. The post is straightforward, and the answer is clearly School.
+</think>
+
+Let's think step by step. The post mentions ""school and stuff,"" which typically refers to academic or educational stress. The phrase ""so hard with school"" indicates difficulty in managing school-related responsibilities, such as coursework, exams, or deadlines. No other factors like financial issues, work, or family are explicitly mentioned.  
+
+Answer: School"

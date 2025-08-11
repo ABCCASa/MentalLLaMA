@@ -1,0 +1,284 @@
+query,label,response
+"You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: [I'm not seeking any medical advice, just want to know if anyone has had similar experiences] I've just started taking Lexapro for moderate depression and anxiety. For the first week I was prescribed 5mg, 10mg thereafter. It's been two days and I have this mild feeling like I'm on ecstasy/MDMA. My body feels light and I have this weird concentration of energy above my neck at the back of my head. Has anyone felt this/experienced this?
+Aspect: thwarted belongingness
+Response: Let's think step by step.",false,"<think>
+Okay, let's tackle this. The user wants to know if the post shows a risk of the aspect ""thwarted belongingness"" based on interpersonal risk factors for mental disturbance.
+
+First, I need to understand what ""thwarted belongingness"" means. From what I remember, thwarted belongingness refers to a feeling of not being accepted or belonging in a social group, leading to emotional distress. It's related to social isolation or a lack of connection with others.
+
+Now, looking at the post. The person is talking about starting Lexapro for depression and anxiety. They mention they took 5mg then 10mg, and after the first week, they felt a mild euphoria like ecstasy or MDMA. Their body feels light, and there's a weird energy above their neck. They're asking if others have experienced similar things.
+
+The key here is whether the post indicates a risk of thwarted belongingness. The person is discussing their own experiences with medication and side effects. The symptoms they describe (light body, weird energy) could be side effects of SSRIs like Lexapro. However, the post doesn't explicitly mention feelings of isolation, not being accepted, or a lack of social connections. They're just sharing their symptoms and asking if others have had similar experiences. 
+
+The aspect in question is about thwarted belongingness, which is more about social exclusion or a lack of belonging. The post doesn't mention anything about not fitting in, feeling rejected, or being excluded from social groups. The person is more concerned with their own physical and psychological effects from the medication, not their social interactions. 
+
+So, even though the post is about their experience with medication and side effects, the aspect of thwarted belongingness isn't directly addressed. There's no indication of social isolation or a lack of belonging. Therefore, the answer should be False.
+</think>
+
+Answer: False"
+"You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: [I'm not seeking any medical advice, just want to know if anyone has had similar experiences] I've just started taking Lexapro for moderate depression and anxiety. For the first week I was prescribed 5mg, 10mg thereafter. It's been two days and I have this mild feeling like I'm on ecstasy/MDMA. My body feels light and I have this weird concentration of energy above my neck at the back of my head. Has anyone felt this/experienced this?
+Aspect: perceived burdensomeness
+Response: Let's think step by step.",false,"<think>
+Okay, let's tackle this. The user wants to know if the post shows a risk of ""perceived burdensomeness"" based on interpersonal risk factors for mental disturbance.
+
+First, I need to understand what ""perceived burdensomeness"" means in this context. It's about feeling like one is burdened by their situation, perhaps leading to mental distress. The post is about starting Lexapro for depression and anxiety, and experiencing unusual sensations like lightness and energy. 
+
+The user is asking if this indicates a risk of perceived burdensomeness. The key here is to see if the symptoms mentioned (lightness, energy) relate to perceived burdensomeness. Perceived burdensomeness might involve feeling overwhelmed or burdened by one's condition, leading to mental disturbance. 
+
+The post mentions the user is taking medication and has experienced unusual feelings. However, the symptoms described (lightness, energy) are more like side effects of the medication rather than feelings of burden. The user is seeking validation, not necessarily indicating a burden. 
+
+So, even though the user is experiencing side effects, the post doesn't explicitly mention feeling burdened or overwhelmed. The focus is on the physical sensations and the need for validation, not the emotional burden. Therefore, the answer would be False because the post doesn't show a risk of perceived burdensomeness.
+</think>
+
+Response: Let's think step by step. The post describes experiencing unusual physical sensations (lightness, energy) while taking Lexapro for depression and anxiety. These symptoms are likely side effects of the medication, not indicators of perceived burdensomeness. The user is seeking validation, not evidence of feeling burdened or overwhelmed. The aspect ""perceived burdensomeness"" refers to a sense of being overwhelmed or burdened, which is not explicitly addressed in the post.  
+Answer: False"
+"You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: Im afraid. The suicide scale is true. Its gets progressively worse and you dont even realize it. I was at 1 contemplating death and that was it. Now as i live i keep moving farther into the scale. Not existing is all i long for. Its all i think about. Its all i desire. Ive written 2 goodbye notes. I constantly open up the lid of pills and acting as if ill swallow them. Yesterday and today i have been making nooses with a thin belt and putting it around my neck. I squeeze so hard to simulate what its like. When i do i can feel the pressure in the top sides of my head. I can feel the rush and fear. I stopped giving a shit about everything and my attention is mainly death. Someone please comfort me. I am afraid.
+Aspect: thwarted belongingness
+Response: Let's think step by step.",true,"<think>
+Okay, let's tackle this. The user wants to know if the post shows a risk of ""thwarted belongingness"" based on interpersonal risk factors for mental disturbance. 
+
+First, I need to understand what ""thwarted belongingness"" means. From what I remember, thwarted belongingness refers to a feeling of not being accepted or belonging in a social group, leading to emotional distress. It's related to the need for connection and the fear of rejection.
+
+Now, looking at the post. The person is talking about feeling afraid, having a suicide scale that's worsening, contemplating death, and having written two goodbye notes. They mention being stuck in a cycle of thinking about death, using physical actions like making nooses, and feeling the pressure in their head. They also mention stopping caring about everything and focusing solely on death.
+
+The key points here are the feelings of isolation, the focus on death and suicide, and the lack of social connection. The person is expressing a deep sense of fear and despair, which could be linked to a lack of belonging. The post doesn't explicitly mention being excluded from a group or feeling disconnected from others, but the intense focus on death and the self-isolation behaviors suggest that they might be struggling with a sense of not fitting in or being accepted. 
+
+However, the aspect is ""thwarted belongingness,"" which is more about the need for social acceptance and the fear of rejection. The post does mention the person's own actions (like making nooses) and the emotional state of being afraid, but does it directly indicate a lack of belonging? The person might be feeling that they don't belong, but the post doesn't explicitly state that. It's more about their internal struggle with death and isolation rather than a direct statement about belonging. 
+
+But wait, the person is talking about being alone and not being able to connect with others. The act of making nooses and the focus on death might be a way of trying to connect with others, but the post doesn't explicitly say they're not belonging. However, the presence of such intense feelings and the lack of social interaction could imply a thwarted belongingness. 
+
+Alternatively, maybe the answer is True because the post shows a risk of thwarted belongingness through the person's isolation and focus on death. But I need to be careful. The aspect is about the risk of mental disturbance due to interpersonal factors. The post doesn't directly mention social exclusion or lack of belonging, but the emotional state and actions might be indicators. 
+
+Hmm, I think the answer is True because the person is expressing a deep sense of isolation and despair, which could be linked to a lack of social connection, hence thwarted belongingness.
+</think>
+
+Let's think step by step. The post describes a person's intense emotional state, including fear, suicidal ideation, and a focus on death. The actions (e.g., making nooses, self-harm) and the emphasis on isolation suggest a struggle with social connection and a sense of not belonging. While the post doesn't explicitly mention social exclusion, the emotional intensity and self-isolation behaviors align with thwarted belongingness, which involves a lack of acceptance or connection. The risk of mental disturbance due to interpersonal factors (e.g., isolation) is evident.  
+
+Answer: True"
+"You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: Im afraid. The suicide scale is true. Its gets progressively worse and you dont even realize it. I was at 1 contemplating death and that was it. Now as i live i keep moving farther into the scale. Not existing is all i long for. Its all i think about. Its all i desire. Ive written 2 goodbye notes. I constantly open up the lid of pills and acting as if ill swallow them. Yesterday and today i have been making nooses with a thin belt and putting it around my neck. I squeeze so hard to simulate what its like. When i do i can feel the pressure in the top sides of my head. I can feel the rush and fear. I stopped giving a shit about everything and my attention is mainly death. Someone please comfort me. I am afraid.
+Aspect: perceived burdensomeness
+Response: Let's think step by step.",true,"<think>
+Okay, let's tackle this. The user wants to know if the post shows a risk of ""perceived burdensomeness"" based on interpersonal risk factors for mental disturbance.
+
+First, I need to understand what ""perceived burdensomeness"" means in this context. It's about feeling overwhelmed by responsibilities or obligations, leading to a sense of being burdened. The post is about someone feeling afraid, having a suicide scale that's worsening, and constantly thinking about death. They mention writing goodbye notes, using a noose, and feeling pressure in their head. They're isolated and focused on death.
+
+The aspect here is about perceived burdensomeness. The post doesn't directly talk about being burdened by responsibilities or tasks. Instead, it's about existential dread, fear of death, and a sense of being trapped. The person is dealing with severe emotional distress but isn't explicitly mentioning feeling burdened by something specific. However, the mention of ""not existing"" and ""constant thoughts about death"" might relate to perceived burdensomeness. But I need to check if the key aspect is about the burden of life or the burden of death. 
+
+The example given in the problem was about feeling alone, which isn't directly about burdensomeness. The user's answer was False because the post didn't indicate burden. In this case, the post is about fear of death and existential despair, which might be more related to suicide ideation rather than perceived burdensomeness. Therefore, the answer would be False because the post doesn't explicitly show a risk of perceived burdensomeness but rather a risk of suicide ideation and existential crisis.
+</think>
+
+Response: Let's think step by step. The post describes intense fear, suicidal ideation, and a focus on death, indicating severe psychological distress. However, the aspect ""perceived burdensomeness"" refers to feeling overwhelmed by responsibilities or obligations. The text does not explicitly mention burdens or tasks causing distress. Instead, it focuses on existential dread and isolation. While the person is overwhelmed by their thoughts, the risk factor here is suicide ideation, not perceived burdensomeness.  
+Answer: False"
+"You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: I have found that one of the main issues keeping me from being productive and moving forward is my inability to believe in myself. That is, I‚Äôm too worried about what others perceive me to be, and never being able to relax and exist in the moment. I‚Äôve had therapy and medication for depression but none of it helps. If I can‚Äôt be better or get better, what‚Äôs the point? Why shouldn‚Äôt I just kill myself? I don‚Äôt want to keep trying. Life is boring. All my wildest dreams always lead to me ending up alone in some way or another. All so I can die without hurting anyone. I‚Äôve been going over the attempts at suicide I‚Äôve made in the past, and wonder if I just can‚Äôt follow through on anything. All the self harm and pushing people away are just half measures to the real solution. I‚Äôm lost and alone, 5 dollars to whoever wants a free pass to kill me.
+Aspect: thwarted belongingness
+Response: Let's think step by step.",true,"<think>
+Okay, let's tackle this. The user wants to determine if the given post shows a risk of the specified aspect, considering interpersonal risk factors for mental disturbance. The aspect here is ""thwarted belongingness.""
+
+First, I need to understand what ""thwarted belongingness"" means. From what I know, thwarted belongingness refers to a feeling of not belonging or being disconnected from others, often leading to feelings of isolation, loneliness, and a lack of social connection. People with this issue might struggle with forming relationships or feeling that they don't fit in with others.
+
+Now, looking at the post. The user provided a post that's quite intense. The person is talking about feeling unable to believe in themselves, worrying about what others think, and being too focused on the present. They mention therapy and medication for depression but say none help. They talk about feeling alone, having dreams that lead to suicide, and being lost and alone. They also mention self-harm and pushing people away as half-measures.
+
+The key points here are the feelings of isolation, lack of belonging, and the desire to end their life. The person is expressing a deep sense of loneliness and not being accepted by others. They mention being too worried about others' perceptions, which is a common symptom of thwarted belongingness. The post also talks about not being able to relax and exist in the moment, which could relate to social anxiety or a fear of rejection.
+
+The aspect in question is thwarted belongingness. The post does indicate a strong sense of isolation and a lack of social connection. The person is constantly worried about others' perceptions, which is a key component of thwarted belongingness. They also mention being alone and feeling lost, which aligns with the idea of not feeling part of a group or community.
+
+However, I need to check if the post directly mentions the aspect. The post does talk about being alone, feeling lost, and not belonging. These are all signs of thwarted belongingness. The mention of self-harm and suicide is a red flag, but the aspect here is about the risk of mental disturbance, not the actual intent to harm. The post is expressing a risk of mental disturbance, which includes thwarted belongingness.
+
+So, based on the content, the post does show a risk of thwarted belongingness. Therefore, the answer should be True.
+</think>
+
+Let's think step by step. The post describes a deep sense of isolation, fear of rejection, and a lack of social connection. The individual is excessively preoccupied with others' perceptions, struggles with self-belief, and feels lost and alone. These are hallmark symptoms of thwarted belongingness, where a person feels disconnected from others and struggles to form meaningful relationships. The post also mentions self-harm and suicidal ideation, which are linked to mental health risks, but the core issue here is the interpersonal risk factor of thwarted belongingness. 
+
+Answer: True"
+"You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: I have found that one of the main issues keeping me from being productive and moving forward is my inability to believe in myself. That is, I‚Äôm too worried about what others perceive me to be, and never being able to relax and exist in the moment. I‚Äôve had therapy and medication for depression but none of it helps. If I can‚Äôt be better or get better, what‚Äôs the point? Why shouldn‚Äôt I just kill myself? I don‚Äôt want to keep trying. Life is boring. All my wildest dreams always lead to me ending up alone in some way or another. All so I can die without hurting anyone. I‚Äôve been going over the attempts at suicide I‚Äôve made in the past, and wonder if I just can‚Äôt follow through on anything. All the self harm and pushing people away are just half measures to the real solution. I‚Äôm lost and alone, 5 dollars to whoever wants a free pass to kill me.
+Aspect: perceived burdensomeness
+Response: Let's think step by step.",true,"<think>
+Okay, let's tackle this. The user wants to know if the post shows a risk of ""perceived burdensomeness"" based on interpersonal risk factors for mental disturbance. 
+
+First, I need to understand what ""perceived burdensomeness"" means in this context. It's about feeling overwhelmed by responsibilities or the pressure to live up to others' expectations, leading to a sense of being burdened. The post mentions the person is worried about others' perceptions, avoids being present in the moment, and feels stuck in a cycle of self-doubt and suicide attempts. They mention therapy and medication not helping, and a sense of being lost and alone. 
+
+The key points here are the self-doubt, fear of others' judgment, and the feeling of being trapped. The person is struggling with self-worth and the pressure to conform, which can contribute to perceived burdensomeness. The mention of suicide attempts and feeling alone also points to deeper psychological distress. 
+
+But wait, the aspect is ""perceived burdensomeness,"" which is specifically about the burden of being judged or expected. The post does talk about being worried about others' perceptions and not being able to relax, which aligns with that. However, the answer needs to be True or False. 
+
+The example given was about ""perceived burdensomeness"" and the response was False because the post didn't directly indicate burden. Here, the post does mention the person's fear of others' judgment and the feeling of being alone, which are signs of perceived burdensomeness. However, the aspect is about mental disturbance risk factors. The person is in a state of severe depression, suicidal thoughts, and self-harm, which are more indicative of a severe mental health crisis rather than just perceived burdensomeness. 
+
+But the question is specifically about the aspect of perceived burdensomeness. The post does mention the burden of others' expectations and the feeling of being alone, which are part of perceived burdensomeness. However, the answer might depend on whether the post explicitly states that the person feels burdened by others' expectations. The post says they are too worried about others' perceptions and can't relax, which could be a sign of perceived burdensomeness. 
+
+But in the example, the answer was False because the post didn't directly indicate burden. Here, the post does mention the burden (worried about others' perceptions) but also other aspects like suicide attempts. However, the aspect is specifically about perceived burdensomeness. So, even though the post mentions the burden, the answer might be True because the post does indicate that the person is feeling burdened by others' expectations. 
+
+Wait, but the question is whether the post shows risk of the aspect. The aspect is ""perceived burdensomeness."" The post does mention the person's fear of others' perception and the feeling of being alone, which are signs of perceived burdensomeness. Therefore, the answer would be True. However, the example's answer was False because the post didn't directly indicate burden. But in this case, the post does mention the burden. 
+
+Alternatively, maybe the answer is True because the post does indicate that the person is burdened by others' expectations. So the response would be True. But I need to be careful. The key is whether the post shows the risk of the aspect. The aspect is perceived burdensomeness, which is a risk factor for mental disturbance. The post does mention the person's worry about others' perceptions, which is a component of perceived burdensomeness. Therefore, the answer should be True.
+</think>
+
+True
+
+The post explicitly mentions the individual's fear of others' perceptions, their inability to relax, and their feelings of being alone and lost. These elements align with the concept of ""perceived burdensomeness,"" which involves feeling overwhelmed by external judgments or expectations. While the post also includes severe mental health crises (suicide attempts, self-harm), the specific aspect of ""perceived burdensomeness"" is directly addressed through the individual's concerns about others' perceptions and their struggle to exist in the moment. Thus, the post shows a risk of the given aspect."
+"You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: :(( not sure wats wrong with me. i think i‚Äôve been feeling ok lately, content. now i‚Äôm having bad thoughts again. i‚Äôm overwhelmed. i feel so alone... no one actually gives a shit about how i feel. it won‚Äôt end :( i think i was meant to commit suicide. i feel stupid for trying to be positive. I got an actual 60% on this assignment at school and it fucked with me. i cried in the bathroom stall and cut myself up like the pathetic idiot i am. i‚Äôm so tired of myself.
+Aspect: thwarted belongingness
+Response: Let's think step by step.",true,"<think>
+Okay, let's tackle this. The user wants to know if the post shows a risk of the aspect ""thwarted belongingness"" considering interpersonal risk factors for mental disturbance.
+
+First, I need to understand what ""thwarted belongingness"" means. From what I remember, thwarted belongingness refers to a sense of not being accepted or valued by others, leading to feelings of isolation and a lack of connection. It's related to social isolation and feeling like an outcast.
+
+Now, looking at the post. The person is talking about feeling alone, not being understood, and even considering suicide. They mention feeling overwhelmed, being stupid for trying to be positive, and having bad thoughts. They also talk about cutting themselves, which is a severe self-harm behavior. There's a lot of emotional distress here.
+
+The key points here are the feelings of isolation, not being understood, and the lack of support. The person is expressing that no one cares about their feelings, which directly relates to thwarted belongingness. They feel like they're the only one experiencing these issues, which is a common symptom of thwarted belongingness. The mention of suicide and self-harm further indicates severe emotional distress and a risk of mental disturbance.
+
+So, the post does show signs of thwarted belongingness because the person is struggling with feelings of isolation and not being accepted, which are core aspects of that risk factor. Therefore, the answer should be True.
+</think>
+
+Let's think step by step. The post describes profound feelings of isolation, being disregarded by others, and a sense of worthlessness. The individual expresses that no one cares about their emotional state, feels overwhelmed, and even considers suicide. These elements strongly indicate a risk of thwarted belongingness, as the person is struggling with a lack of social connection and acceptance. The mention of self-harm and suicidal ideation further underscores the severity of their emotional distress. 
+
+Answer: True"
+"You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: :(( not sure wats wrong with me. i think i‚Äôve been feeling ok lately, content. now i‚Äôm having bad thoughts again. i‚Äôm overwhelmed. i feel so alone... no one actually gives a shit about how i feel. it won‚Äôt end :( i think i was meant to commit suicide. i feel stupid for trying to be positive. I got an actual 60% on this assignment at school and it fucked with me. i cried in the bathroom stall and cut myself up like the pathetic idiot i am. i‚Äôm so tired of myself.
+Aspect: perceived burdensomeness
+Response: Let's think step by step.",true,"<think>
+Okay, let's tackle this. The user wants to know if the post shows a risk of the aspect ""perceived burdensomeness."" The post is very emotional and includes several signs of distress. Let me break it down.
+
+First, the person mentions feeling overwhelmed and being alone, which could relate to perceived burdensomeness. They talk about having bad thoughts again, feeling stupid for trying to be positive, and feeling like a ""pathetic idiot."" There's a mention of cutting themselves, which is a serious sign of self-harm. Also, they mention being tired of themselves and having a 60% on an assignment that's making them feel bad. 
+
+Perceived burdensomeness usually refers to the sense that one is a burden to others or that one's existence is a burden. The post does talk about feeling alone, being overwhelmed, and feeling like a burden (they say ""no one actually gives a shit about how I feel""). The self-harm and the mention of feeling stupid and pathetic also indicate a sense of self-worth issues and emotional distress. 
+
+So, the key points are the feelings of being overwhelmed, being alone, self-harm, and the sense of being a burden. These all point towards perceived burdensomeness. The answer should be True.
+</think>
+
+True
+
+The post includes multiple indicators of perceived burdensomeness: feelings of being alone, overwhelmed, self-harm, and a sense of being a ""pathetic idiot."" The mention of ""no one actually gives a shit about how I feel"" and the emotional distress (e.g., crying, cutting) further support the idea of a burdened self-perception."
+"You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: Help? I'm just feeling really shitty at how I seem to have spent the majority of my time recently lying around not doing anything, letting my room and shit get into a mess and just been consumed by negative thoughts. I'm also worse at a particular time of day. Like I've barely done anything productive this month and I hate myself for it, and I hate the fact I can't try hard enough/be bothered to help myself out of this. Some days are better than others, yes, but at the end of the day I just can't do it. I'm 17 and wasting my fucking life being lazy and doing nothing, the new year has made me realise. I want to make resolutions but I know I can't keep them so I'm not bothering. Any help/advice??
+Aspect: thwarted belongingness
+Response: Let's think step by step.",false,"<think>
+Okay, let's tackle this. The user wants to know if the given post shows a risk of the aspect ""thwarted belongingness"" based on interpersonal risk factors for mental disturbance.
+
+First, I need to understand what ""thwarted belongingness"" means. From what I remember, thwarted belongingness refers to a feeling of not belonging or being excluded from social groups, leading to low self-esteem, loneliness, and other mental health issues. It's about the desire to be part of a group but feeling unable to do so, which can lead to feelings of isolation and worthlessness.
+
+Now, looking at the post. The person is talking about feeling really shitty, spending time lying around, letting their room get messy, negative thoughts, and being consumed by them. They mention they can't do productive things and hate themselves for it. They also talk about not being able to make resolutions and feeling like they're wasting their life. The post ends with a plea for help.
+
+The key points here are the feelings of self-criticism, being overwhelmed by negative thoughts, not being able to do productive things, and the sense of isolation. The person is struggling with their own actions and feelings, which could relate to a lack of social connection or feeling excluded. However, the post doesn't explicitly mention being excluded from a group or feeling lonely. It's more about personal responsibility and self-blame. 
+
+But the aspect is ""thwarted belongingness,"" which is about not feeling part of a group. The person might feel like they're not contributing to their social circle, but the post doesn't directly state that. They might be feeling isolated, but the risk factors for mental disturbance include things like low self-esteem, which can be linked to thwarted belongingness. However, the post doesn't explicitly mention social exclusion or a lack of belonging. It's more about personal failure and self-criticism.
+
+So, the answer would be False because the post doesn't directly indicate a risk of thwarted belongingness. The main issues are self-blame, negative thoughts, and lack of productivity, which are more related to self-worth or self-efficacy rather than social belongingness.
+</think>
+
+Response: Let's think step by step. The post discusses feelings of self-criticism, isolation, and inability to engage in productive activities, but it does not explicitly mention social exclusion or a lack of belonging. The focus is on personal responsibility and self-blame rather than interpersonal exclusion. While the individual may feel isolated, the aspect ""thwarted belongingness"" specifically relates to social exclusion or a lack of connection to a group. The post does not directly indicate this risk.  
+Answer: False"
+"You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
+
+The final answer should select from: True, False
+
+Here is a example:
+Post: Do you ever sleep 17 hours? Help me not feel so alone
+Aspect: perceived burdensomeness
+Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
+Answer: False
+
+Post: Help? I'm just feeling really shitty at how I seem to have spent the majority of my time recently lying around not doing anything, letting my room and shit get into a mess and just been consumed by negative thoughts. I'm also worse at a particular time of day. Like I've barely done anything productive this month and I hate myself for it, and I hate the fact I can't try hard enough/be bothered to help myself out of this. Some days are better than others, yes, but at the end of the day I just can't do it. I'm 17 and wasting my fucking life being lazy and doing nothing, the new year has made me realise. I want to make resolutions but I know I can't keep them so I'm not bothering. Any help/advice??
+Aspect: perceived burdensomeness
+Response: Let's think step by step.",false,"<think>
+Okay, let's tackle this. The user wants to know if the given post shows a risk of ""perceived burdensomeness"" based on interpersonal risk factors for mental disturbance.
+
+First, I need to understand what ""perceived burdensomeness"" means in this context. It likely refers to the feeling of being burdened or responsible for one's own life, leading to negative self-perception or feelings of inadequacy. 
+
+Looking at the post: The person is talking about feeling really shitty, spending time lying around, letting their room get messy, negative thoughts, and being consumed by them. They mention they can't do anything productive this month and hate themselves for it. They also talk about not being able to help themselves and feeling like they're wasting their life. They want to make resolutions but can't keep them, so they're not bothering. 
+
+The key points here are the self-criticism, feeling guilty about not being productive, and the sense of being overwhelmed by negative thoughts. The person is struggling with self-esteem issues, feeling responsible for their own actions, and having a negative self-image. These are signs of perceived burdensomeness, where the individual feels they're burdening themselves or others, leading to mental distress.
+
+The aspect is ""perceived burdensomeness,"" so the answer should be True because the post clearly indicates the person is experiencing this feeling. They're self-critical, feel guilty, and have a negative self-view, which are all indicators of perceived burdensomeness leading to mental disturbance.
+</think>
+
+Let's think step by step. The post describes the individual feeling guilty about being lazy, neglecting responsibilities (room mess, productivity), and self-criticism about their actions. They acknowledge their inability to improve and feel overwhelmed by negative thoughts, which aligns with the concept of perceived burdensomeness—feeling responsible for their own struggles and self-loathing. The mention of ""wasting their life"" and ""not being able to keep resolutions"" further emphasizes self-doubt and a sense of inadequacy, which are risk factors for mental disturbance. 
+
+Answer: True"
