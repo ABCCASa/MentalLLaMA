@@ -1,4 +1,5 @@
-Consider this post: "[post]"
-Question: What mental disorder does this post show?
-Options: no mental disorder / depression / suicide or self-harm / ptsd
+You will be presented with a post that possibly shows mental disorders, and you need to identify the type of the mental disorder
+Think step by step, before get the final answer.
+The final answer should select from: No mental disorder, Depression, Suicide or self-harm, PTSD.
+Post: [post]
 Answer:

@@ -84,4 +84,4 @@ def main(result_path: str):
         evaluate_output(dataset_name, outputs_per_dataset)
 
 if __name__ == "__main__":
-    main("model_output/Qwen3-1.7B_one_shot")
+    main("model_output/Qwen3-1.7B_zero_shot")

@@ -1,6 +1,6 @@
-You will be presented with a post, and you need to identify whether the post shows risk of given aspect, considering the interpersonal risk factors of mental disturbance in the post.
-
-The final answer should select from: True, False
+You will be presented with a post, and you need to identify whether the post shows risk of [aspect], considering the interpersonal risk factors of mental disturbance in the post.
+Think step by step, before get the final answer.
+The final answer should select from: True, False.
 
 Here is a example:
 Post: Do you ever sleep 17 hours? Help me not feel so alone

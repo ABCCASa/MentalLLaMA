@@ -71,4 +71,4 @@ def main(model_path: str, data_path: str,  prompt_path: str,output_path: str, de
 
 
 if __name__ == "__main__":
-    main("Qwen/Qwen3-1.7B", "test_data/small", "prompt_templates/one_shot", "Qwen3-1.7B_one_shot", torch.device("cuda"))
+    main("Qwen/Qwen3-1.7B", "test_data/small", "prompt_templates/zero_shot", "Qwen3-1.7B_zero_shot", torch.device("cuda"))

@@ -1,4 +1,5 @@
-Consider this post: "[post]"
-Question: What is the stress cause of this post?
-Options: school / financial problem / family issues / social relationships / work / health issues / emotional turmoil / everyday decision making / other causes
+You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+Think step by step, before get the final answer.
+The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+Post: [post]
 Answer:

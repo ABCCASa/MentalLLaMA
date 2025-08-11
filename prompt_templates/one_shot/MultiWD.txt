@@ -1,6 +1,6 @@
-You will be presented with a post, and you need to identify whether the wellness dimension of given aspect exists in the post according to Dunn’s model of psychological wellness.
-
-The final answer should select from: True, False
+You will be presented with a post, and you need to identify whether the wellness dimension of [aspect] exists in the post according to Dunn’s model of psychological wellness.
+Think step by step, before get the final answer.
+The final answer should select from: True, False.
 
 Here is a example:
 Post: I question my purpose daily. Will I ever find the "one" for me? This spiral of emotions I deal with on a daily basis...
