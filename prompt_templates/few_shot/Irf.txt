@@ -8,6 +8,22 @@ Aspect: perceived burdensomeness
 Response: Let's think step by step. The post itself does not directly indicate any feelings of burden or thoughts of being better off gone. It is simply asking...
 Answer: False
 
+Here are some examples:
+Post: [post:+1]
+Aspect: [aspect:+1]
+Response: Let's think step by step: [reason:+1]
+Answer: [label:+1]
+
+Post: [post:+2]
+Aspect: [aspect:+2]
+Response: Let's think step by step: [reason:+2]
+Answer: [label:+2]
+
+Post: [post:+3]
+Aspect: [aspect:+3]
+Response: Let's think step by step: [reason:+3]
+Answer: [label:+3]
+
 Post: [post]
 Aspect: [aspect]
-Response: Let's think step by step.
+Response: Let's think step by step:

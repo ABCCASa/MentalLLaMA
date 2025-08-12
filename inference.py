@@ -18,11 +18,23 @@ def load_test_data(root, prompt_path):
 
         queries = []
         labels = []
-        for index, row in pd.read_csv(f"{root}/{file}", dtype=str).iterrows():
+
+        df = pd.read_csv(f"{root}/{file}", dtype=str)
+        for row_index, row in df.iterrows():
             def replace_placeholder(match):
-                key = match.group(1)
-                return str(row[key])
+                key = match.group(1).strip()
+                if ":" in key:
+                    key, idx_str =  key.split(":", 1)
+                    key, idx_str = key.strip(), idx_str.strip()
+                    if idx_str.startswith(("+", "-")):
+                        idx = (row_index + int(idx_str)) % len(df)
+                    else:
+                        idx = int(idx_str) % len(df)
+                    return df[key][idx]
+                else:
+                    return str(row[key])
             query = re.sub(r"\[([^\]]+)\]", replace_placeholder, template_prompt)
+            print(query)
             queries.append(query)
             labels.append(row["label"])
         test_data[dataset_name] = {
@@ -71,4 +83,4 @@ def main(model_path: str, data_path: str,  prompt_path: str,output_path: str, de
 
 
 if __name__ == "__main__":
-    main("Qwen/Qwen3-1.7B", "test_data/small", "prompt_templates/zero_shot", "Qwen3-1.7B_zero_shot", torch.device("cuda"))
+    main("Qwen/Qwen3-1.7B", "test_data/small", "prompt_templates/few_shot", "Qwen3-1.7B_zero_shot", torch.device("cuda"))

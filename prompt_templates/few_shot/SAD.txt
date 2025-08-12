@@ -2,10 +2,18 @@ You will be presented with a post that shows stress, and you need to identify th
 Think step by step, before get the final answer.
 The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
 
-Here is a example:
-Post: I have been wanting to find another job for some time now
-Response: Let's think step by step. The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates...
-Answer: Work
+Here are some examples:
+Post: [post:+1]
+Response: Let's think step by step: [reason:+1]
+Answer: [label:+1]
+
+Post: [post:+2]
+Response: Let's think step by step: [reason:+2]
+Answer: [label:+2]
+
+Post: [post:+3]
+Response: Let's think step by step: [reason:+3]
+Answer: [label:+3]
 
 Post: [post]
-Response: Let's think step by step.
+Response: Let's think step by step:
