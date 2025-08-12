@@ -20,6 +20,7 @@ def load_test_data(root, prompt_path):
         labels = []
 
         df = pd.read_csv(f"{root}/{file}", dtype=str)
+
         for row_index, row in df.iterrows():
             def replace_placeholder(match):
                 key = match.group(1).strip()
