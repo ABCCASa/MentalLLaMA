@@ -35,10 +35,6 @@ The content inside square brackets is replaced with data from the dataset.
 
 * `[<key>:-<n>]` — the value of <key> in the row current − n.Example: `[reason:-1]` → the rationale from the previous row.
 
-### Notes
-
-* 
-
 
 
 <p align="center" width="100%">
