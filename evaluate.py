@@ -57,7 +57,6 @@ def evaluate_output(dataset_name, df):
     else:
         raise NameError(f"{dataset_name} is not a valid dataset name")
 
-
     for index, row in df.iterrows():
         output_an = row["response"].lower().rsplit("answer:", 1)[-1]
         ref_an = row["label"]

@@ -35,7 +35,6 @@ def load_test_data(root, prompt_path):
                 else:
                     return str(row[key])
             query = re.sub(r"\[([^\]]+)\]", replace_placeholder, template_prompt)
-            print(query)
             queries.append(query)
             labels.append(row["label"])
         test_data[dataset_name] = {
@@ -84,4 +83,4 @@ def main(model_path: str, data_path: str,  prompt_path: str,output_path: str, de
 
 
 if __name__ == "__main__":
-    main("Qwen/Qwen3-1.7B", "test_data/small", "prompt_templates/few_shot", "Qwen3-1.7B_zero_shot", torch.device("cuda"))
+    main("Qwen/Qwen3-1.7B", "test_data/small", "prompt_templates/few_shot_cot", "Qwen3-1.7B_few_shot_cot", torch.device("cuda"))

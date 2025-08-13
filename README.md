@@ -1,3 +1,46 @@
+# How to Use Prompt Templates
+The prompt templates need to be placed in the `./prompt_templates/<prompt type>/<dataset name>.txt`.
+
+Here is a simple example of prompt:
+```
+You will be presented with a post, and you need to identify whether the poster suffers from stress.
+Think step by step, before get the final answer.
+The final answer should select from: True, False.
+
+Here are some examples:
+Post: [post:+1]
+Response: Let's think step by step: [reason:+1]
+Answer: [label:+1]
+
+Post: [post:+2]
+Response: Let's think step by step: [reason:+2]
+Answer: [label:+2]
+
+Post: [post:+3]
+Response: Let's think step by step: [reason:+3]
+Answer: [label:+3]
+
+Post: [post]
+Response: Let's think step by step:
+```
+## Placeholder syntax
+
+The content inside square brackets is replaced with data from the dataset.
+
+* `[<key>]` — the value of `<key>` in the current row.Example: `[post]`. Make sure the dataset contains the fields you reference.
+
+* `[<key>:<n>]` — the value of `<key>` in row `<n>` (absolute row index). Example: `[post:1]` → the post in row 1.
+
+* `[<key>:+<n>]` — the value of <key> in the row current + n. Example: `[post:+1]` → the post in the next row.
+
+* `[<key>:-<n>]` — the value of <key> in the row current − n.Example: `[reason:-1]` → the rationale from the previous row.
+
+### Notes
+
+* 
+
+
+
 <p align="center" width="100%">
 <img src="https://i.postimg.cc/0Nd8VxbL/logo.png"  width="100%" height="100%">
 </p>
