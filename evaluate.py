@@ -77,10 +77,10 @@ def evaluate_output(dataset_name, df):
     print(result)
 
 
-def main(result_path: str):
-    outputs =  load_outputs(result_path)
+def main(output_path: str):
+    outputs =  load_outputs(f"model_output/{output_path}")
     for dataset_name, outputs_per_dataset in outputs.items():
         evaluate_output(dataset_name, outputs_per_dataset)
 
 if __name__ == "__main__":
-    main("model_output/Qwen3-1.7B_zero_shot")
+    main("Qwen3-8B_few_shot")

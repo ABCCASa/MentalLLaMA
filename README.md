@@ -27,7 +27,7 @@ Response: Let's think step by step:
 
 The content inside square brackets is replaced with data from the dataset.
 
-* `[<key>]` — the value of `<key>` in the current row.Example: `[post]`. Make sure the dataset contains the fields you reference.
+* `[<key>]` — the value of `<key>` in the current row. Example: `[post]`. Make sure the dataset contains the fields you reference.
 
 * `[<key>:<n>]` — the value of `<key>` in row `<n>` (absolute row index). Example: `[post:1]` → the post in row 1.
 

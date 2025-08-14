@@ -52,6 +52,11 @@ def convert(root, source_folder, target_folder, filename):
         label_and_reason = output.split("Reasoning:", 1)
         label_text = label_and_reason[0].lower()
         reason = label_and_reason[1].strip()
+        if reason == "":
+            print(f"[{dataset_name}] Can't obtain a reasoning step from: row {index}")
+            continue
+
+
         extracted_labels = extract_label_indexes(label_text, valid_labels, map_labels)
 
         if len(extracted_labels) != 1:
@@ -96,4 +101,4 @@ def convert_all(root, source_folder, target_folder):
 
 
 if __name__ == "__main__":
-    convert_all("test_data", "instruction", "small")
+    convert_all("valid_data", "instruction", "our")
