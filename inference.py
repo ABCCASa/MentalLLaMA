@@ -6,6 +6,7 @@ from huggingface_hub import login, logout
 import re
 import argparse
 import math
+import time
 
 def load_test_data(root, prompt_type, ignore_dataset = None):
     test_data = {}
@@ -75,6 +76,7 @@ def batch_generate_response(model, tokenizer, queries):
 
 
 def batch_generate_response_for_dataset(model, tokenizer, queries, dataset_name, batch_size, print_freq):
+    start_time = time.time()
     responses = []
     total_batch = math.ceil(len(queries) / batch_size)
     progress = 0
@@ -85,7 +87,7 @@ def batch_generate_response_for_dataset(model, tokenizer, queries, dataset_name,
         progress += 1
         if progress % print_freq == 0:
             print(batch_data[0], batch_response[0])
-            print(f"[{dataset_name}] {progress}/{total_batch}\n")
+            print(f"[{dataset_name}] {progress}/{total_batch}, {int(time.time()-start_time)}s\n")
 
     return responses
 
@@ -93,36 +95,36 @@ def batch_generate_response_for_dataset(model, tokenizer, queries, dataset_name,
 def save_output(output, dataset_name, output_path):
     if not os.path.exists("model_output/"):
         os.mkdir("model_output/")
-    if not os.path.exists("model_output/"+output_path):
-        os.mkdir("model_output/"+output_path)
+    if not os.path.exists(f"model_output/{output_path}"):
+        os.mkdir(f"model_output/{output_path}")
     output = pd.DataFrame(output, index=None)
     output.to_csv(f"model_output/{output_path}/{dataset_name}.csv",  index=False)
 
 
-def main(model_path: str, data_path: str,  prompt_type: str, output_path: str, batch_size: int, print_freq: int):
+def main(model_path: str, data_path: str,  prompt_type: str, output_path: str, device: str, batch_size: int, print_freq: int):
 
     # find the dataset that already have result
     exsited_dataset = []
-    for file in os.listdir(f"model_output/{output_path}"):
-        if not file.endswith(".csv"):
-            continue
-        dataset_name = file.split('.')[0]
-        exsited_dataset.append(dataset_name)
+    if os.path.exists(f"model_output/{output_path}"):
+        for file in os.listdir(f"model_output/{output_path}"):
+            if not file.endswith(".csv"):
+                continue
+            dataset_name = file.split('.')[0]
+            exsited_dataset.append(dataset_name)
 
     # load dataset
     test_data = load_test_data(data_path, prompt_type, exsited_dataset)
 
     # login hugging face
     try:
-
-        login(token=os.environ["HF_TOKEN"], add_to_git_credential=False)
+        login()
     except:
         print("Please set HF_TOKEN environment variable")
 
     # load model
     cache_dir = "my_model_cache"
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    print(device)
+    device = torch.device(device)
+    print("current device:", device)
     tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
     model = AutoModelForCausalLM.from_pretrained(model_path, device_map=device, torch_dtype=torch.bfloat16, cache_dir=cache_dir)
 
@@ -143,8 +145,9 @@ if __name__ == "__main__":
     parser.add_argument('--data_path', type=str)
     parser.add_argument('--prompt_type', type=str)
     parser.add_argument('--output_path', type=str)
+    parser.add_argument('--device', type=str)
     parser.add_argument('--batch_size', type=int, default=2)
     parser.add_argument('--print_freq', type=int, default=50)
 
-    #main(**vars(parser.parse_args()))
-    main("Qwen/Qwen3-0.6B", "test_data/small", "zero_shot", "Qwen3-8B_zero_shot_small", 2,1)
+    main(**vars(parser.parse_args()))
+    #main("Qwen/Qwen3-0.6B", "test_data/small", "zero_shot", "Qwen3-8B_zero_shot_small", "cuda" ,2,1)

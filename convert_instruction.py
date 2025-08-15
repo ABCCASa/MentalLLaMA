@@ -88,6 +88,8 @@ def convert(root, source_folder, target_folder, filename):
     data["label"] = labels
     data["reason"] = reasons
 
+    data.head(400)
+
     if not os.path.exists(f"{root}/{target_folder}"):
         os.makedirs(f"{root}/{target_folder}")
 
@@ -101,4 +103,4 @@ def convert_all(root, source_folder, target_folder):
 
 
 if __name__ == "__main__":
-    convert_all("valid_data", "instruction", "our")
+    convert_all("test_data", "instruction", "small_400")
