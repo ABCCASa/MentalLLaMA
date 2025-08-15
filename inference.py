@@ -2,7 +2,7 @@ import os
 import pandas as pd
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
-from huggingface_hub import login, logout
+from huggingface_hub import login
 import re
 import argparse
 import math
@@ -14,20 +14,15 @@ def load_test_data(root, prompt_type, ignore_dataset = None):
         if not file.endswith(".csv"):
             continue
         dataset_name = file.split('.')[0]
-
         if ignore_dataset is not None and dataset_name in ignore_dataset:
             continue
-
-
 
         with open(f"prompt_templates/{prompt_type}/{dataset_name}.txt", "r", encoding="utf-8") as f:
             template_prompt = f.read()
 
         queries = []
         labels = []
-
         df = pd.read_csv(f"{root}/{file}", dtype=str)
-
         for row_index, row in df.iterrows():
             def replace_placeholder(match):
                 key = match.group(1).strip()
@@ -44,34 +39,30 @@ def load_test_data(root, prompt_type, ignore_dataset = None):
             query = re.sub(r"\[([^\]]+)\]", replace_placeholder, template_prompt)
             queries.append(query)
             labels.append(row["label"])
-        test_data[dataset_name] = {
-            "query": queries,
-            "label": labels
-        }
+        test_data[dataset_name] = {"query": queries, "label": labels}
     return test_data
-
-
-
 
 
 def batch_generate_response(model, tokenizer, queries):
     tokenizer.padding_side = "left"
-    messages = [[{"role": "user", "content": query}] for query in queries]
-    model_inputs = tokenizer.apply_chat_template(
-        messages,
-        add_generation_prompt=True,
-        tokenize=True,
-        return_dict=True,
-        return_tensors="pt",
-        padding=True,
-    ).to(model.device)
+    if getattr(tokenizer, "chat_template", None):
+        messages = [[{"role": "user", "content": query}] for query in queries]
+        model_inputs = tokenizer.apply_chat_template(
+            messages,
+            add_generation_prompt=True,
+            tokenize=True,
+            return_dict=True,
+            return_tensors="pt",
+            padding=True,
+        ).to(model.device)
+    else:
+        model_inputs = tokenizer(queries, return_tensors="pt",padding=True).to(model.device)
 
     with torch.no_grad():
         generated_ids = model.generate(**model_inputs, max_length=16384)
 
     output_ids = generated_ids[:,len(model_inputs.input_ids[0]):]
     responses = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
-
     return responses
 
 
@@ -88,7 +79,6 @@ def batch_generate_response_for_dataset(model, tokenizer, queries, dataset_name,
         if progress % print_freq == 0:
             print(batch_data[0], batch_response[0])
             print(f"[{dataset_name}] {progress}/{total_batch}, {int(time.time()-start_time)}s\n")
-
     return responses
 
 
@@ -119,17 +109,15 @@ def main(model_path: str, data_path: str,  prompt_type: str, output_path: str, d
     try:
         login()
     except:
-        print("Please set HF_TOKEN environment variable")
+        print("Login Fail")
 
     # load model
     cache_dir = "my_model_cache"
     device = torch.device(device)
     print("current device:", device)
     tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
-    model = AutoModelForCausalLM.from_pretrained(model_path, device_map=device, torch_dtype=torch.bfloat16, cache_dir=cache_dir)
-
-    #if tokenizer.pad_token_id is None:
-    #    tokenizer.pad_token = tokenizer.eos_token
+    model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.bfloat16, cache_dir=cache_dir).to(device).eval()
+    model = torch.compile(model, mode="reduce-overhead", fullgraph=True)
 
     # start inference
     for dataset_name, data in test_data.items():
@@ -150,4 +138,4 @@ if __name__ == "__main__":
     parser.add_argument('--print_freq', type=int, default=50)
 
     main(**vars(parser.parse_args()))
-    #main("Qwen/Qwen3-0.6B", "test_data/small", "zero_shot", "Qwen3-8B_zero_shot_small", "cuda" ,2,1)
+    #main("Qwen/Qwen3-0.6B", "test_data/our", "zero_shot", "Qwen3-8B_zero_shot_small", "cuda" ,2,1)
