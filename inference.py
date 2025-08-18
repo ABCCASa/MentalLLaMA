@@ -58,7 +58,7 @@ def batch_generate_response(model, tokenizer, queries):
     else:
         model_inputs = tokenizer(queries, return_tensors="pt",padding=True).to(model.device)
 
-    with torch.no_grad():
+    with torch.inference_mode():
         generated_ids = model.generate(**model_inputs, max_length=16384)
 
     output_ids = generated_ids[:,len(model_inputs.input_ids[0]):]
@@ -66,7 +66,7 @@ def batch_generate_response(model, tokenizer, queries):
     return responses
 
 
-def batch_generate_response_for_dataset(model, tokenizer, queries, dataset_name, batch_size, print_freq):
+def generate_response_for_dataset(model, tokenizer, queries, dataset_name, batch_size, print_freq):
     start_time = time.time()
     responses = []
     total_batch = math.ceil(len(queries) / batch_size)
@@ -116,13 +116,22 @@ def main(model_path: str, data_path: str,  prompt_type: str, output_path: str, d
     device = torch.device(device)
     print("current device:", device)
     tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
+    if tokenizer.pad_token is None:
+        print("tokenizer does not have pad_token, use eos_token to instead.")
+        tokenizer.pad_token = tokenizer.eos_token
+
+
+
     model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype=torch.bfloat16, cache_dir=cache_dir).to(device).eval()
     model = torch.compile(model, mode="reduce-overhead", fullgraph=True)
+    if model.generation_config is not None and model.generation_config.pad_token_id is None:
+        print("model does not have pad_token, auto set")
+        model.generation_config.pad_token_id = tokenizer.pad_token_id
 
     # start inference
     for dataset_name, data in test_data.items():
         print(f"Start Dataset: {dataset_name}")
-        responses = batch_generate_response_for_dataset(model, tokenizer, data["query"], dataset_name, batch_size, print_freq)
+        responses = generate_response_for_dataset(model, tokenizer, data["query"], dataset_name, batch_size, print_freq)
         data["response"] = responses
         save_output(data, dataset_name, output_path)
 
@@ -138,4 +147,4 @@ if __name__ == "__main__":
     parser.add_argument('--print_freq', type=int, default=50)
 
     main(**vars(parser.parse_args()))
-    #main("Qwen/Qwen3-0.6B", "test_data/our", "zero_shot", "Qwen3-8B_zero_shot_small", "cuda" ,2,1)
+    #main("Qwen/Qwen3-0.6B", "test_data/our", "zero_shot", "Qwen3-1.7B_zero_shot_small", "cuda" ,2,1)
