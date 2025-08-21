@@ -73,7 +73,6 @@ def convert(root, source_folder, target_folder, filename):
             aspect = query.split('Question: Does the post show risk of')[1].replace('?', "").strip()
             aspects.append(aspect)
 
-
         label = extracted_labels[0]
         posts.append(post)
         labels.append(label)
@@ -88,8 +87,6 @@ def convert(root, source_folder, target_folder, filename):
     data["label"] = labels
     data["reason"] = reasons
 
-    data.head(400)
-
     if not os.path.exists(f"{root}/{target_folder}"):
         os.makedirs(f"{root}/{target_folder}")
 
@@ -103,4 +100,4 @@ def convert_all(root, source_folder, target_folder):
 
 
 if __name__ == "__main__":
-    convert_all("test_data", "instruction", "small_400")
+    convert_all("test_data", "instruction", "our2")
