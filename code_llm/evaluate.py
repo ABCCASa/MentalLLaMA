@@ -4,6 +4,13 @@ from sklearn.metrics import f1_score, accuracy_score
 from typing import List
 from transformers import AutoTokenizer
 from huggingface_hub import login
+import sys
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+if parent_dir not in sys.path:
+    print(f"Adding '{parent_dir}' to PYTHONPATH")
+    sys.path.append(parent_dir)
+import IMHI_dataset
 
 def load_outputs(root):
     outputs = {}
@@ -41,31 +48,15 @@ def evaluate_output(dataset_name, output_df, tokenizer, result_dict):
     output_label_index = []
     count = 0
 
-    if dataset_name == 'swmh':
-        valid_labels = ['no mental', 'suicide', 'depression', 'anxiety', 'bipolar']
-        map_labels = ['no mental disorder', 'suicide', 'depression', 'anxiety', 'bipolar']
-    elif dataset_name == 't-sid':
-        valid_labels = ['no mental', 'depression', ['suicide', 'self-harm'], 'ptsd']
-        map_labels = ['no mental disorder', 'depression', 'suicide or self-harm', 'ptsd']
-    elif dataset_name in ['CLP', 'DR', 'dreaddit', 'loneliness', 'Irf', 'MultiWD']:
-        valid_labels = ["false", "true"]
-        map_labels = ["false", "true"]
-    elif dataset_name == 'SAD':
-        valid_labels = ['other', 'school', 'financial', 'family issue', 'social', 'work', 'health', 'emotional', 'decision']
-        map_labels = ['other causes', 'school', 'financial problem', 'family issues', 'social relationships', 'work', 'health issues', 'emotional turmoil', 'everyday decision making']
-    elif dataset_name == "CAMS":
-        valid_labels = [['none','no causes'], ['bias', 'abuse'], ['job', 'career'], 'medication', 'relationship', 'alienation']
-        map_labels = ['none', 'bias or abuse', 'jobs and career', 'medication', 'relationship', 'alienation']
-    else:
-        raise NameError(f"{dataset_name} is not a valid dataset name")
+    search_labels = IMHI_dataset.get_search_labels(dataset_name)
+    standard_labels = IMHI_dataset.get_standard_labels(dataset_name)
 
     output_token_count = []
     for index, row in output_df.iterrows():
         output_token_count.append(len(tokenizer(row["response"])["input_ids"]))
-        golden_label_index.append(get_label_index(row["label"], map_labels))
-        #output_an = row["response"].lower().rsplit("answer:", 1)[-1]
+        golden_label_index.append(get_label_index(row["label"], standard_labels))
         output_an = row["response"].lower()
-        output_id = extract_label_index(output_an, valid_labels)
+        output_id = extract_label_index(output_an, search_labels)
         if output_id == -1:
             count += 1
             output_id = 0
@@ -93,16 +84,15 @@ def evaluate_output(dataset_name, output_df, tokenizer, result_dict):
 
 
 def save_result(result_df, output_path):
-    if not os.path.exists("model_result/"):
-        os.mkdir("model_result/")
-    result_df.to_csv(f"model_result/{output_path}.csv",  index=False)
+    os.makedirs("../model_result/", exist_ok=True)
+    result_df.to_csv(f"../model_result/{output_path}.csv",  index=False)
 
 def main(output_path: str, model_path:str = None):
     if input('Enter "y" if you want login: ') == "y":
         login()
-    cache_dir = "my_model_cache"
+    cache_dir = "../my_model_cache"
     tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
-    outputs =  load_outputs(f"model_output/{output_path}")
+    outputs =  load_outputs(f"../model_output/{output_path}")
     result_dict = {
         "dataset": [],
         "average acc": [],

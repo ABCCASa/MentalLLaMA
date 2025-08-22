@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-import evaluate
+from llm import evaluate
 import pickle
 import argparse
 import torch

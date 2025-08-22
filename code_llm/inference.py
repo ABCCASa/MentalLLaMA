@@ -3,46 +3,37 @@ import pandas as pd
 import torch
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from huggingface_hub import login
-import re
 import argparse
 import math
 import time
 import gc
+import sys
 
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+if parent_dir not in sys.path:
+    print(f"Adding '{parent_dir}' to PYTHONPATH")
+    sys.path.append(parent_dir)
+from IMHI_dataset import get_dict_dataset
 
-def load_all_dataset(dataset_path, prompt_type, ignore_dataset = None):
-    test_data = {}
-    for file in os.listdir(dataset_path):
+def load_all_datasets(dataset_dir, prompt_dir, ignore_dataset = None):
+    test_datasets = {}
+    for file in os.listdir(dataset_dir):
         if not file.endswith(".csv"):
             continue
         dataset_name = file.split('.')[0]
         if ignore_dataset is not None and dataset_name in ignore_dataset:
             continue
+        full_dataset_file = f"{dataset_dir}/{file}"
+        full_prompt_file =f"{prompt_dir}/{dataset_name}.txt"
+        current_dataset = get_dict_dataset(full_dataset_file, full_prompt_file)
 
-        with open(f"prompt_templates/{prompt_type}/{dataset_name}.txt", "r", encoding="utf-8") as f:
-            template_prompt = f.read()
+        current_dataset = {k: v[:2] for k, v in current_dataset.items()}
 
-        queries = []
-        labels = []
-        df = pd.read_csv(f"{dataset_path}/{file}", dtype=str)
-        for row_index, row in df.iterrows():
-            def replace_placeholder(match):
-                key = match.group(1).strip()
-                if ":" in key:
-                    key, idx_str =  key.split(":", 1)
-                    key, idx_str = key.strip(), idx_str.strip()
-                    if idx_str.startswith(("+", "-")):
-                        idx = (row_index + int(idx_str)) % len(df)
-                    else:
-                        idx = int(idx_str) % len(df)
-                    return df[key][idx]
-                else:
-                    return str(row[key])
-            query = re.sub(r"\[([^\]]+)\]", replace_placeholder, template_prompt)
-            queries.append(query)
-            labels.append(row["label"])
-        test_data[dataset_name] = {"query": queries, "label": labels}
-    return test_data
+        test_datasets[dataset_name] = current_dataset
+
+
+    return test_datasets
 
 
 def generate_batch_responses(model, tokenizer, queries, max_length):
@@ -83,37 +74,35 @@ def generate_responses_for_dataset(model, tokenizer, queries, dataset_name, batc
     return responses
 
 
-def save_output(output, dataset_name, output_path):
-    if not os.path.exists("model_output/"):
-        os.mkdir("model_output/")
-    if not os.path.exists(f"model_output/{output_path}"):
-        os.mkdir(f"model_output/{output_path}")
+def save_output(output, dataset_name, output_dir):
+    os.makedirs(output_dir, exist_ok=True)
     output = pd.DataFrame(output, index=None)
-    output.to_csv(f"model_output/{output_path}/{dataset_name}.csv",  index=False)
+    output.to_csv(f"{output_dir}/{dataset_name}.csv",  index=False)
 
 
-def main(model_path: str, data_path: str,  prompt_type: str, output_path: str, device: str, batch_size: int, max_length:int , print_freq: int):
+def main(model_path: str, data_dir: str,  prompt_dir: str, output_dir: str, device: str, batch_size: int, max_length:int , print_freq: int):
 
-    # find the dataset that already have result
-    exsited_dataset = []
-    if os.path.exists(f"model_output/{output_path}"):
-        for file in os.listdir(f"model_output/{output_path}"):
+    # find the dataset that already have result, and ignore them
+    exsited_datasets = []
+    if os.path.exists(output_dir):
+        for file in os.listdir(output_dir):
             if not file.endswith(".csv"):
                 continue
             dataset_name = file.split('.')[0]
-            exsited_dataset.append(dataset_name)
+            exsited_datasets.append(dataset_name)
 
     # load dataset
-    test_data = load_all_dataset(data_path, prompt_type, exsited_dataset)
+    test_datasets = load_all_datasets(data_dir, prompt_dir, exsited_datasets)
 
     # login hugging face
     if input('Enter "y" if you want login: ') == "y":
         login()
 
-    cache_dir = "my_model_cache"
+
     device = torch.device(device)
     print("current device:", device)
 
+    cache_dir = "../my_model_cache"
     # load tokenizer
     tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
     tokenizer.padding_side = "left"
@@ -127,26 +116,26 @@ def main(model_path: str, data_path: str,  prompt_type: str, output_path: str, d
         print("[warning] model does not have pad_token, auto set")
         model.generation_config.pad_token_id = tokenizer.pad_token_id
 
-
     # start inference
-    for dataset_name, data in test_data.items():
+    for dataset_name, data in test_datasets.items():
         print(f"Start Dataset: {dataset_name}")
-        responses = generate_responses_for_dataset(model, tokenizer, data["query"], dataset_name, batch_size,
-                                                   max_length, print_freq)
+        responses = generate_responses_for_dataset(model, tokenizer, data["query"], dataset_name, batch_size, max_length, print_freq)
         data["response"] = responses
-        save_output(data, dataset_name, output_path)
+        save_output(data, dataset_name, output_dir)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_path', type=str)
-    parser.add_argument('--data_path', type=str)
-    parser.add_argument('--prompt_type', type=str)
-    parser.add_argument('--output_path', type=str)
+    parser.add_argument('--data_dir', type=str)
+    parser.add_argument('--prompt_dir', type=str)
+    parser.add_argument('--output_dir', type=str)
     parser.add_argument('--device', type=str)
-    parser.add_argument('--batch_size', type=int, default=2)
-    parser.add_argument('--print_freq', type=int, default=50)
+    parser.add_argument('--batch_size', type=int, default=24)
+    parser.add_argument('--print_freq', type=int, default=5)
     parser.add_argument('--max_length', type=int, default=5000)
 
     main(**vars(parser.parse_args()))
-    #main("Qwen/Qwen3-0.6B", "test_data/our", "zero_shot", "Qwen3-1.7B_zero_shot_small", "cuda" ,2, 1000,1)
+    # cd code_llm
+    # python inference.py --model_path Qwen/Qwen3-0.6B --data_dir ../dataset/test --prompt_dir ../prompt_templates/zero_shot --output_dir ../model_output/Qwen3-0.6B_zero_shot  --device cuda --batch_size 24 --max_length 5000 --print_freq 5
+

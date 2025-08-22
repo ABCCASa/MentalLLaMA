@@ -2,7 +2,7 @@ import pandas as pd
 import os
 from typing import List
 
-def extract_labels(text:str, valid_labels: List, map_labels)-> List:
+def extract_label_indexes(text:str, valid_labels: List, map_labels)-> List:
     extracted_labels = []
     for index, item in enumerate(valid_labels):
         if isinstance(item, list):
@@ -52,32 +52,26 @@ def convert(root, source_folder, target_folder, filename):
         label_and_reason = output.split("Reasoning:", 1)
         label_text = label_and_reason[0].lower()
         reason = label_and_reason[1].strip()
-        extracted_labels = extract_labels(label_text, valid_labels, map_labels)
-
-        if len(extracted_labels) != 1:
-            print(f"[{dataset_name}: {index}] Can't obtain a unique label from: {label_text}, get: {extracted_labels}")
+        if reason == "":
+            print(f"[{dataset_name}] Can't obtain a reasoning step from: row {index}")
             continue
 
-        if "query" in df.columns:
-            query = row["query"]
-            post = query.split("Question:")[0].removeprefix("Post:").strip()
-            if dataset_name == "MultiWD":
-                aspect = query.split('Question: The answer to the question "Does the')[1].replace('wellness dimension exists in the post?" is', "").strip()
-                aspects.append(aspect)
-            elif dataset_name == "Irf":
-                aspect = query.split('Question: The answer to the question: "Does the post shows risk of')[1].replace(
-                    '?" is', "").strip()
-                aspects.append(aspect)
-        else:
-            post = row["post"].removeprefix("Post: ").strip()
-            if dataset_name == "MultiWD":
-                aspect = row["question"].split('Question: The answer to the question "Does the')[1].replace('wellness dimension exists in the post?" is', "").strip()
-                aspects.append(aspect)
-            elif dataset_name == "Irf":
-                aspect = row["question"].split('Question: The answer to the question: "Does the post shows risk of')[1].replace(
-                    '?" is', "").strip()
-                aspects.append(aspect)
 
+        extracted_labels = extract_label_indexes(label_text, valid_labels, map_labels)
+
+        if len(extracted_labels) != 1:
+            print(f"[{dataset_name}] Can't obtain a unique label from: {label_text}, get{extracted_labels}")
+            continue
+
+
+        query = row["query"]
+        post = query.split('" Question:')[0].removeprefix('Consider this post: "').strip()
+        if dataset_name == "MultiWD":
+            aspect = query.split('Question: Does the')[1].replace('wellness dimension exist in the post?', "").strip()
+            aspects.append(aspect)
+        elif dataset_name == "Irf":
+            aspect = query.split('Question: Does the post show risk of')[1].replace('?', "").strip()
+            aspects.append(aspect)
 
         label = extracted_labels[0]
         posts.append(post)
@@ -93,8 +87,6 @@ def convert(root, source_folder, target_folder, filename):
     data["label"] = labels
     data["reason"] = reasons
 
-
-
     if not os.path.exists(f"{root}/{target_folder}"):
         os.makedirs(f"{root}/{target_folder}")
 
@@ -108,4 +100,4 @@ def convert_all(root, source_folder, target_folder):
 
 
 if __name__ == "__main__":
-    convert_all("test_data", "complete", "our_2")
+    convert_all("../test_data", "instruction", "our2")
