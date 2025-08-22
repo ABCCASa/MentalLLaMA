@@ -28,7 +28,7 @@ def load_all_datasets(dataset_dir, prompt_dir, ignore_dataset = None):
         full_prompt_file =f"{prompt_dir}/{dataset_name}.txt"
         current_dataset = get_dict_dataset(full_dataset_file, full_prompt_file)
 
-        current_dataset = {k: v[:2] for k, v in current_dataset.items()}
+        #current_dataset = {k: v[:2] for k, v in current_dataset.items()}
 
         test_datasets[dataset_name] = current_dataset
 

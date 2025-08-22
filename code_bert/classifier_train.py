@@ -76,7 +76,7 @@ def main(model_path: str, dataset_name: str, batch_size: int, device: str, save_
     model = BertForSequenceClassification.from_pretrained(model_path, cache_dir=cache_dir, num_labels=len(labels)).to(torch.device(device))
 
 
-    prompt_path = f"../prompt_templates/Classifier/{dataset_name}.txt"
+    prompt_path = f"../prompt_templates/classifier/{dataset_name}.txt"
     train_dataset = IMHI_dataset.get_dict_dataset(f"../dataset/train/{dataset_name}.csv", prompt_path)
     train_dataset = Dataset.from_dict(train_dataset)
 
