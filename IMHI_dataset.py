@@ -2,7 +2,6 @@ import pandas as pd
 import re
 import random
 
-
 def random_number_exclude(start, end, exclude):
     # [start, end)
     choices = [i for i in range(start, end) if i not in exclude]
