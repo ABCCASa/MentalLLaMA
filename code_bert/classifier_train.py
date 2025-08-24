@@ -22,7 +22,7 @@ def train_one_epoch(model, dataloader, optimizer, scheduler, max_norm):
     losses = 0
     total = 0
     device = model.device
-    for batch in tqdm(dataloader):
+    for batch in tqdm(dataloader, leave=False):
         batch = {k: v.to(device) for k, v in batch.items()}
         outputs = model(**batch)
 
@@ -49,7 +49,7 @@ def valid_model(model, dataloader):
     correct = 0
     losses = 0
     with torch.inference_mode():
-        for batch in tqdm(dataloader):
+        for batch in tqdm(dataloader, leave=False):
             batch = {k: v.to(device) for k, v in batch.items()}
             outputs = model(**batch)
 
@@ -111,9 +111,9 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
 
     logs = []
 
-
+    print(f"[{dataset_name}] start training")
     for epoch in range(epochs):
-        print(f"[{dataset_name}] Epochs: {epoch+1}/{epochs}")
+        print(f"Epochs: {epoch+1}/{epochs}")
         log = train_one_epoch(model, train_loader, optimizer, scheduler, max_norm)
         print(f"train loss: {log['train_loss']: .4f}, lr: {log['lr']: .5e}")
         log.update(valid_model(model, valid_loader))
