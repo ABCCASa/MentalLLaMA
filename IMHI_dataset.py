@@ -1,20 +1,35 @@
 import pandas as pd
 import re
 import random
+from datasets import Dataset
+
+def extract_prompts(text):
+    tag_pat = re.compile(r'<\s*([^\>]+)\s*>')
+    matches = list(tag_pat.finditer(text))
+    out = {}
+    for i, m in enumerate(matches):
+        key = m.group(1)
+        start = m.end()
+        end = matches[i + 1].start() if i + 1 < len(matches) else len(text)
+        out[key] = text[start:end].strip()
+    return out
 
 def random_number_exclude(start, end, exclude):
     # [start, end)
     choices = [i for i in range(start, end) if i not in exclude]
     return random.choice(choices)
 
-def get_dict_dataset(dataset_file, prompt_file):
+def get_dataset(dataset_file, prompt_file):
     with open(prompt_file, "r", encoding="utf-8") as f:
         template_prompt = f.read()
-    queries = []
-    labels = []
+        template_prompts = extract_prompts(template_prompt)
+
+    dataset = {k:[] for k in template_prompts.keys()}
+
     df = pd.read_csv(dataset_file, dtype=str)
     for row_index, row in df.iterrows():
         random_keys = {"current": row_index}  # add current to randoms_keys to avoid pick the current row
+
         def replace_placeholder(match):
             key = match.group(1).strip()
             if ":" in key:
@@ -36,10 +51,10 @@ def get_dict_dataset(dataset_file, prompt_file):
             else:
                 return str(row[key])
 
-        query = re.sub(r"\[([^\]]+)\]", replace_placeholder, template_prompt)
-        queries.append(query)
-        labels.append(row["label"])
-    return  {"query": queries, "label": labels}
+        for k, v in template_prompts.items():
+            dataset[k].append( re.sub(r"\[([^\]]+)\]", replace_placeholder, v))
+
+    return Dataset.from_dict(dataset)
 
 
 def get_standard_labels(dataset_name: str):

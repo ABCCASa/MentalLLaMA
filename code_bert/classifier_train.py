@@ -78,11 +78,8 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
     tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
     model = AutoModelForSequenceClassification.from_pretrained(model_path, cache_dir=cache_dir, num_labels=len(labels)).to(device)
 
-    train_dataset = IMHI_dataset.get_dict_dataset(train_data_file, prompt_file)
-    train_dataset = Dataset.from_dict(train_dataset)
-
-    valid_dataset = IMHI_dataset.get_dict_dataset(valid_data_file, prompt_file)
-    valid_dataset = Dataset.from_dict(valid_dataset)
+    train_dataset = IMHI_dataset.get_dataset(train_data_file, prompt_file)
+    valid_dataset = IMHI_dataset.get_dataset(valid_data_file, prompt_file)
 
     def format_example(ex):
         out = tokenizer(ex["query"], max_length=512, truncation=True)
@@ -161,11 +158,12 @@ if __name__ == "__main__":
     parser.add_argument('--batch_size', type=int, default=24)
     parser.add_argument('--lr', type=float, default=2e-5)
     parser.add_argument('--epochs', type=int, default=10)
-    parser.add_argument('--warmup_ratio', type=float, default=0.1)
+    parser.add_argument('--warmup_ratio', type=float, default=0.08)
     parser.add_argument('--max_norm', type=float, default=1)
 
     args = parser.parse_args()
     main(**vars(args))
 
-    # python classifier_train.py --model_path google-bert/bert-base-cased --train_data_dir ../dataset/train --valid_data_dir ../dataset/valid --prompt_dir ../prompt_templates/classifier --output_dir ../fine-tuned_model/bert --device cuda --batch_size 32 --epochs 5
+    # cd code_bert
+    # python classifier_train.py --model_path google-bert/bert-base-cased --train_data_dir ../dataset/train --valid_data_dir ../dataset/valid --prompt_dir ../prompt_templates/classifier --output_dir ../fine-tuned_model/bert --device cuda --batch_size 32 --epochs 4
 

@@ -1,5 +1,8 @@
+<query>
 You will be presented with a post that shows mental disorders, and you need to identify the cause of the mental disorders.
 Think step by step, before get the final answer.
 The final answer should select from: None, Bias or abuse, Jobs and career, Medication, Relationship, Alienation.
 Post: [post]
 Answer:
+
+<label>[label]

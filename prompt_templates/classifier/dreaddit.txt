@@ -1,1 +1,2 @@
-[post]
+<query>[post]
+<label>[label]

@@ -1,5 +1,8 @@
+<query>
 You will be presented with a post that possibly shows mental disorders, and you need to identify what mental disorder symptoms does this post show.
 Think step by step, before get the final answer.
 The final answer should select from: No mental disorder, Suicide, Depression, Anxiety, Bipolar.
 Post: [post]
 Answer:
+
+<label>[label]

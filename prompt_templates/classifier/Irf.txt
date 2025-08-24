@@ -1,1 +1,2 @@
-[aspect]: [post]
+<query>[aspect]: [post]
+<label>[label]

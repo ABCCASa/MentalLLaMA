@@ -1,3 +1,4 @@
+<query>
 You will be presented with a post that possibly shows mental disorders, and you need to identify the type of the mental disorder
 Think step by step, before get the final answer.
 The final answer should select from: No mental disorder, Depression, Suicide or self-harm, PTSD.
@@ -17,3 +18,5 @@ Answer: [label:+3]
 
 Post: [post]
 Response: Let's think step by step:
+
+<label>[label]

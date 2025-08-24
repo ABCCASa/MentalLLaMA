@@ -15,50 +15,58 @@ import argparse
 import math
 import time
 import gc
-from IMHI_dataset import get_dict_dataset
+from IMHI_dataset import get_dataset
 
 
-def generate_batch_responses(model, tokenizer, queries, max_length):
+def generate_batch_responses(model, tokenizer, datas, max_length):
     if getattr(tokenizer, "chat_template", None):
-        messages = [[{"role": "user", "content": query}] for query in queries]
-        model_inputs = tokenizer.apply_chat_template(
-            messages,
-            add_generation_prompt=True,
-            tokenize=True,
-            return_dict=True,
-            return_tensors="pt",
-            padding=True,
-        ).to(model.device)
+        if "system" in datas.keys():
+            messages = [
+                [{"role": "system", "content": system}, {"role": "user", "content": query}]
+                for query, system in zip(datas["query"], datas["system"])]
+        else:
+            messages = [[{"role": "user", "content": query}] for query in datas["query"]]
+        messages = tokenizer.apply_chat_template(messages, add_generation_prompt=True, tokenize=False,)
     else:
-        model_inputs = tokenizer(queries, return_tensors="pt", padding=True).to(model.device)
+        messages = datas["query"]
+
+    model_inputs = tokenizer(messages, return_tensors="pt", padding=True).to(model.device)
+
     with torch.inference_mode():
         generated_ids = model.generate(**model_inputs, max_new_tokens=max_length)
     output_ids = generated_ids[:, len(model_inputs.input_ids[0]):]
 
     responses = tokenizer.batch_decode(output_ids, skip_special_tokens=True)
-    return responses
+    return messages, responses
 
-def generate_responses_for_dataset(model, tokenizer, queries, dataset_name, batch_size, max_length, print_freq):
+def generate_responses_for_dataset(model, tokenizer, dataset, dataset_name, batch_size, max_length, print_freq):
     start_time = time.time()
+    model_inputs = []
     responses = []
-    total_batch = math.ceil(len(queries) / batch_size)
+    total_batch = math.ceil(len(dataset) / batch_size)
     progress = 0
-    for i in range(0, len(queries), batch_size):
-        batch_data = queries[i: min(i + batch_size, len(queries))]
-        batch_response = generate_batch_responses(model, tokenizer, batch_data, max_length)
-        responses += batch_response
+    for i in range(0, len(dataset), batch_size):
+        batch_data = dataset[i: min(i + batch_size, len(dataset))]
+        batch_model_inputs, batch_responses = generate_batch_responses(model, tokenizer, batch_data, max_length)
+        responses += batch_responses
+        model_inputs += batch_model_inputs
         progress += 1
         if progress % print_freq == 0 or progress == 1 or progress == total_batch:
-            print(batch_data[0], batch_response[0])
+            print(batch_model_inputs[i], batch_responses[0])
             print(f"[{dataset_name}] {progress}/{total_batch}, {int(time.time()-start_time)}s\n")
     gc.collect()
     torch.cuda.empty_cache()
-    return responses
+    return model_inputs, responses
 
 
 def inference_one_dataset(model, tokenizer, dataset_name, dataset_file, prompt_file, output_file, batch_size: int, max_length, print_freq):
-    dataset = get_dict_dataset(dataset_file, prompt_file)
-    dataset["response"] = generate_responses_for_dataset(model, tokenizer, dataset["query"], dataset_name, batch_size, max_length, print_freq)
+    dataset = get_dataset(dataset_file, prompt_file)
+
+    model_inputs, responses = generate_responses_for_dataset(model, tokenizer, dataset, dataset_name, batch_size,
+                                                         max_length, print_freq)
+    dataset = dataset.to_dict()
+    dataset["response"] = responses
+    dataset["model_input"] = model_inputs
 
     # check dir exist
     output_dir = os.path.dirname(output_file)
@@ -126,5 +134,5 @@ if __name__ == "__main__":
 
 
     # cd code_llm
-    # python inference.py --model_path  --data_dir ../dataset/test --prompt_dir ../prompt_templates/zero_shot --output_dir ../model_output/Qwen3-0.6B_zero_shot  --device cuda --batch_size 24 --max_length 5000 --print_freq 5
+    # python inference.py --model_path Qwen/Qwen3-0.6B --data_dir ../dataset/test --prompt_dir ../prompt_templates/zero_shot --output_dir ../model_output/Qwen3-0.6B_zero_shot  --device cuda --batch_size 24 --max_length 5000 --print_freq 5
 
