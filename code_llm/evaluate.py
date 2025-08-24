@@ -1,15 +1,18 @@
 import os
-import pandas as pd
-from sklearn.metrics import f1_score, accuracy_score
-from typing import List
-from transformers import AutoTokenizer
-from huggingface_hub import login
 import sys
+
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
     print(f"Adding '{parent_dir}' to PYTHONPATH")
     sys.path.append(parent_dir)
+
+import pandas as pd
+from sklearn.metrics import f1_score, accuracy_score
+from typing import List
+from transformers import AutoTokenizer
+from huggingface_hub import login
+
 import IMHI_dataset
 
 def load_outputs(root):
@@ -112,4 +115,4 @@ def main(output_path: str, model_path:str = None):
 
 if __name__ == "__main__":
     #main("Llama-3.1-8B_few_shot", "meta-llama/Llama-3.1-8B-Instruct")
-    main("Qwen3-8B_zero_shot", "Qwen/Qwen3-8B")
+    main("Qwen3-8B_few_shot", "Qwen/Qwen3-8B")

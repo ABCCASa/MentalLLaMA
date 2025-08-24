@@ -69,7 +69,9 @@ def inference_one_dataset(model, tokenizer, dataset_name, dataset_file, prompt_f
     output.to_csv(output_file, index=False)
 
 
-def main(model_path: str, data_dir: str,  prompt_dir: str, output_dir: str, device: str, batch_size: int, max_length:int , print_freq: int):
+def main(model_path: str, data_dir: str, prompt_dir: str, output_dir: str, device: str, batch_size: int,
+         max_length:int , print_freq: int):
+
     # login hugging face
     if input('Enter "y" if you want login: ') == "y":
         login()
@@ -104,7 +106,6 @@ def main(model_path: str, data_dir: str,  prompt_dir: str, output_dir: str, devi
             continue
         print(f"Start Dataset: {dataset_name}")
         inference_one_dataset(model, tokenizer, dataset_name, dataset_file, prompt_file, output_file, batch_size, max_length, print_freq)
-
 
 
 

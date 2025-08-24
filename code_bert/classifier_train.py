@@ -1,7 +1,7 @@
 from datasets import Dataset
 import torch
 from transformers import AutoTokenizer, BertForSequenceClassification, DataCollatorWithPadding,  get_linear_schedule_with_warmup
-
+import argparse
 from torch.utils.data import DataLoader
 import json
 import math
@@ -67,22 +67,20 @@ def valid_model(model, dataloader):
     return {"valid_loss": loss, "accuracy": acc}
 
 
+def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, valid_data_file: str, prompt_file: str,
+         batch_size: int, device: torch.device, output_dir: str, lr: float, epochs: int, warmup_ratio: float):
 
-def main(model_path: str, dataset_name: str, batch_size: int, device: str, save_dir: str, lr= 2e-4, epochs = 10, warmup_ratio = 0.1):
     labels = IMHI_dataset.get_standard_labels(dataset_name)
 
     cache_dir = "../my_model_cache"
     tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
-    model = BertForSequenceClassification.from_pretrained(model_path, cache_dir=cache_dir, num_labels=len(labels)).to(torch.device(device))
+    model = BertForSequenceClassification.from_pretrained(model_path, cache_dir=cache_dir, num_labels=len(labels)).to(device)
 
-
-    prompt_path = f"../prompt_templates/classifier/{dataset_name}.txt"
-    train_dataset = IMHI_dataset.get_dict_dataset(f"../dataset/train/{dataset_name}.csv", prompt_path)
+    train_dataset = IMHI_dataset.get_dict_dataset(train_data_file, prompt_file)
     train_dataset = Dataset.from_dict(train_dataset)
 
-    valid_dataset = IMHI_dataset.get_dict_dataset(f"../dataset/valid/{dataset_name}.csv", prompt_path)
+    valid_dataset = IMHI_dataset.get_dict_dataset(valid_data_file, prompt_file)
     valid_dataset = Dataset.from_dict(valid_dataset)
-
 
     def format_example(ex):
         out = tokenizer(ex["query"], max_length=512, truncation=True)
@@ -123,16 +121,47 @@ def main(model_path: str, dataset_name: str, batch_size: int, device: str, save_
         logs.append(log)
 
 
-    save_dir = f"{save_dir}/{dataset_name}"
+    model.save_pretrained(output_dir)
+    tokenizer.save_pretrained(output_dir)
 
-    model.save_pretrained(save_dir)
-    tokenizer.save_pretrained(save_dir)
-
-    with open(f"{save_dir}/log.json", "w") as f:
+    with open(os.path.join(output_dir, "log.json"), "w") as f:
         json.dump(logs, f)
 
+
+def main(model_path:str, train_data_dir: str, valid_data_dir: str, prompt_dir: str, output_dir: str, batch_size: int,
+         device: torch.device, lr: float, epochs: int, warmup_ratio: float):
+
+    device = torch.device(device)
+    for file in os.listdir(train_data_dir):
+        if not file.endswith(".csv"):
+            continue
+        dataset_name = file.split('.')[0]
+        train_data_file = os.path.join(train_data_dir, file)
+        valid_data_file = os.path.join(valid_data_dir, file)
+        if not os.path.exists(valid_data_file):
+            print(f"File {valid_data_file} does not exist, skipping")
+            continue
+        prompt_file = os.path.join(prompt_dir, f"{dataset_name}.txt")
+        output_dir_per_dataset = os.path.join(output_dir, f"{dataset_name}.csv")
+        train_one_dataset(model_path, dataset_name, train_data_file, valid_data_file, prompt_file, batch_size, device,
+                          output_dir_per_dataset, lr, epochs, warmup_ratio)
+
+
 if __name__ == "__main__":
-    main("google-bert/bert-base-uncased",  "SAD", 10, "cuda", "../fine-tuned model/test")
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--model_path', type=str)
+    parser.add_argument('--train_data_dir', type=str)
+    parser.add_argument('--valid_data_dir', type=str)
+    parser.add_argument('--prompt_dir', type=str)
+    parser.add_argument('--output_dir', type=str)
+    parser.add_argument('--device', type=str)
+    parser.add_argument('--batch_size', type=int, default=24)
+    parser.add_argument('--lr', type=float, default=2e-4)
+    parser.add_argument('--epochs', type=int, default=10)
+    parser.add_argument('--warmup_ratio', type=float, default=0.1)
+    args = parser.parse_args()
+    main(**vars(args))
+
 
 
 
