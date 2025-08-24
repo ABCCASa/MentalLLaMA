@@ -1,6 +1,6 @@
 from datasets import Dataset
 import torch
-from transformers import AutoTokenizer, BertForSequenceClassification, DataCollatorWithPadding,  get_linear_schedule_with_warmup
+from transformers import AutoTokenizer, AutoModelForSequenceClassification, DataCollatorWithPadding,  get_linear_schedule_with_warmup
 import argparse
 from torch.utils.data import DataLoader
 import json
@@ -9,6 +9,7 @@ from torch.optim import AdamW
 from tqdm import tqdm
 import sys
 import os
+from torch.nn.utils import clip_grad_norm_
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 if parent_dir not in sys.path:
@@ -16,7 +17,7 @@ if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 import IMHI_dataset
 
-def train_one_epoch(model, dataloader, optimizer, scheduler):
+def train_one_epoch(model, dataloader, optimizer, scheduler, max_norm):
     model.train()
     losses = 0
     total = 0
@@ -24,8 +25,12 @@ def train_one_epoch(model, dataloader, optimizer, scheduler):
     for batch in tqdm(dataloader):
         batch = {k: v.to(device) for k, v in batch.items()}
         outputs = model(**batch)
+
         loss = outputs.loss
         loss.backward()
+
+        clip_grad_norm_(model.parameters(), max_norm)
+
         optimizer.step()
         optimizer.zero_grad()
         scheduler.step()
@@ -37,7 +42,6 @@ def train_one_epoch(model, dataloader, optimizer, scheduler):
     return {"train_loss": avg_loss, "lr": lr}
 
 
-
 def valid_model(model, dataloader):
     model.eval()
     device = model.device
@@ -47,8 +51,6 @@ def valid_model(model, dataloader):
     with torch.inference_mode():
         for batch in tqdm(dataloader):
             batch = {k: v.to(device) for k, v in batch.items()}
-
-            # forward (no labels so outputs.logits 一定存在)
             outputs = model(**batch)
 
             # loss
@@ -68,13 +70,13 @@ def valid_model(model, dataloader):
 
 
 def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, valid_data_file: str, prompt_file: str,
-         batch_size: int, device: torch.device, output_dir: str, lr: float, epochs: int, warmup_ratio: float):
+         batch_size: int, device: torch.device, output_dir: str, lr: float, epochs: int, warmup_ratio: float, max_norm: float):
 
     labels = IMHI_dataset.get_standard_labels(dataset_name)
 
     cache_dir = "../my_model_cache"
     tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
-    model = BertForSequenceClassification.from_pretrained(model_path, cache_dir=cache_dir, num_labels=len(labels)).to(device)
+    model = AutoModelForSequenceClassification.from_pretrained(model_path, cache_dir=cache_dir, num_labels=len(labels)).to(device)
 
     train_dataset = IMHI_dataset.get_dict_dataset(train_data_file, prompt_file)
     train_dataset = Dataset.from_dict(train_dataset)
@@ -84,7 +86,7 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
 
     def format_example(ex):
         out = tokenizer(ex["query"], max_length=512, truncation=True)
-        out["label"] = labels.index(ex["label"])
+        out["labels"] = labels.index(ex["label"])
         return out
 
     train_dataset = train_dataset.map(format_example,  remove_columns=train_dataset.column_names)
@@ -104,7 +106,6 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
         collate_fn=data_collator
     )
 
-
     optimizer = AdamW(model.parameters(), lr=lr)
     num_training_steps = epochs * math.ceil(len(train_loader))
     num_warmup_steps = int(warmup_ratio * num_training_steps)
@@ -112,12 +113,14 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
 
 
     logs = []
+
+
     for epoch in range(epochs):
-        print(f"Epochs: {epoch+1}/{epochs}")
-        log = train_one_epoch(model, train_loader, optimizer, scheduler)
-        print(f"train loss: {log['train_loss']}, lr: {log['lr']}")
+        print(f"[{dataset_name}] Epochs: {epoch+1}/{epochs}")
+        log = train_one_epoch(model, train_loader, optimizer, scheduler, max_norm)
+        print(f"train loss: {log['train_loss']: .4f}, lr: {log['lr']: .5e}")
         log.update(valid_model(model, valid_loader))
-        print(f"valid loss: {log['valid_loss']}, accuracy: {log['accuracy']}")
+        print(f"valid loss: {log['valid_loss']: .4f}, accuracy: {log['accuracy']: .4f}")
         logs.append(log)
 
 
@@ -129,7 +132,7 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
 
 
 def main(model_path:str, train_data_dir: str, valid_data_dir: str, prompt_dir: str, output_dir: str, batch_size: int,
-         device: torch.device, lr: float, epochs: int, warmup_ratio: float):
+         device: torch.device, lr: float, epochs: int, warmup_ratio: float, max_norm:float):
 
     device = torch.device(device)
     for file in os.listdir(train_data_dir):
@@ -142,9 +145,9 @@ def main(model_path:str, train_data_dir: str, valid_data_dir: str, prompt_dir: s
             print(f"File {valid_data_file} does not exist, skipping")
             continue
         prompt_file = os.path.join(prompt_dir, f"{dataset_name}.txt")
-        output_dir_per_dataset = os.path.join(output_dir, f"{dataset_name}.csv")
+        output_dir_per_dataset = os.path.join(output_dir, f"{dataset_name}")
         train_one_dataset(model_path, dataset_name, train_data_file, valid_data_file, prompt_file, batch_size, device,
-                          output_dir_per_dataset, lr, epochs, warmup_ratio)
+                          output_dir_per_dataset, lr, epochs, warmup_ratio, max_norm)
 
 
 if __name__ == "__main__":
@@ -156,13 +159,13 @@ if __name__ == "__main__":
     parser.add_argument('--output_dir', type=str)
     parser.add_argument('--device', type=str)
     parser.add_argument('--batch_size', type=int, default=24)
-    parser.add_argument('--lr', type=float, default=2e-4)
+    parser.add_argument('--lr', type=float, default=2e-5)
     parser.add_argument('--epochs', type=int, default=10)
     parser.add_argument('--warmup_ratio', type=float, default=0.1)
+    parser.add_argument('--max_norm', type=float, default=1)
+
     args = parser.parse_args()
     main(**vars(args))
 
-
-
-
+    # python classifier_train.py --model_path google-bert/bert-base-cased --train_data_dir ../dataset/train --valid_data_dir ../dataset/valid --prompt_dir ../prompt_templates/classifier --output_dir ../fine-tuned_model/bert --device cuda --batch_size 32 --epochs 5
 

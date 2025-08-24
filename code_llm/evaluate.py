@@ -85,7 +85,6 @@ def evaluate_output(dataset_name, output_df, tokenizer, result_dict):
     result_dict["mean token"].append(int(mean_token))
     print(result)
 
-
 def save_result(result_df, output_path):
     os.makedirs("../model_result/", exist_ok=True)
     result_df.to_csv(f"../model_result/{output_path}.csv",  index=False)
@@ -115,4 +114,4 @@ def main(output_path: str, model_path:str = None):
 
 if __name__ == "__main__":
     #main("Llama-3.1-8B_few_shot", "meta-llama/Llama-3.1-8B-Instruct")
-    main("Qwen3-8B_few_shot", "Qwen/Qwen3-8B")
+    main("Llama-2-14B_zero_shot", "meta-llama/Llama-2-13b-chat-hf")

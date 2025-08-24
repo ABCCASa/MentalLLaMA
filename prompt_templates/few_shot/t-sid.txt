@@ -1,1 +1,19 @@
-[post]
+You will be presented with a post that possibly shows mental disorders, and you need to identify the type of the mental disorder
+Think step by step, before get the final answer.
+The final answer should select from: No mental disorder, Depression, Suicide or self-harm, PTSD.
+
+Here are some examples:
+Post: [post:+1]
+Response: Let's think step by step: [reason:+1]
+Answer: [label:+1]
+
+Post: [post:+2]
+Response: Let's think step by step: [reason:+2]
+Answer: [label:+2]
+
+Post: [post:+3]
+Response: Let's think step by step: [reason:+3]
+Answer: [label:+3]
+
+Post: [post]
+Response: Let's think step by step:
