@@ -8,7 +8,7 @@ if parent_dir not in sys.path:
     sys.path.append(parent_dir)
 
 import pandas as pd
-from sklearn.metrics import f1_score, accuracy_score
+import our_metrics
 from typing import List
 from transformers import AutoTokenizer
 from huggingface_hub import login
@@ -46,7 +46,7 @@ def get_label_index(label: str, all_labels: List):
     return all_labels.index(label)
 
 
-def evaluate_output(dataset_name, output_df, tokenizer, result_dict):
+def evaluate_output(dataset_name, output_df, tokenizer):
     golden_label_index = []
     output_label_index = []
     count = 0
@@ -65,25 +65,16 @@ def evaluate_output(dataset_name, output_df, tokenizer, result_dict):
             output_id = 0
         output_label_index.append(output_id)
 
-    avg_accuracy = round(accuracy_score(golden_label_index, output_label_index) * 100, 4)
-    weighted_f1 = round(f1_score(golden_label_index, output_label_index, average='weighted') * 100, 4)
-    micro_f1 = round(f1_score(golden_label_index, output_label_index, average='micro') * 100, 4)
-    macro_f1 = round(f1_score(golden_label_index, output_label_index, average='macro') * 100, 4)
-
     max_token = max(output_token_count)
-    mean_token = sum(output_token_count) / len(output_token_count)
+    mean_token = int(sum(output_token_count) / len(output_token_count))
+    result_dict = {"dataset": dataset_name}
+    result_dict.update(our_metrics.evaluate_all(golden_label_index, output_label_index))
+    result_dict["OOD_count"] = count
+    result_dict["max_token"] = max_token
+    result_dict["mean_token"] = mean_token
+    print(", ".join([f"{k}: {v}" for k, v in result_dict.items()]))
+    return result_dict
 
-    result = f"Dataset: {dataset_name}, average acc:{avg_accuracy}, weighted F1 {weighted_f1}, micro F1 {micro_f1}, macro F1 {macro_f1}, OOD count: {count}, max token: {max_token}, mean token: {int(mean_token)}\n"
-
-    result_dict["dataset"].append(dataset_name)
-    result_dict["average acc"].append(avg_accuracy)
-    result_dict["weighted F1"].append(weighted_f1)
-    result_dict["micro F1"].append(micro_f1)
-    result_dict["macro F1"].append(macro_f1)
-    result_dict["OOD count"].append(count)
-    result_dict["max token"].append(max_token)
-    result_dict["mean token"].append(int(mean_token))
-    print(result)
 
 def save_result(result_df, output_path):
     os.makedirs("../model_result/", exist_ok=True)
@@ -95,18 +86,9 @@ def main(output_path: str, model_path:str = None):
     cache_dir = "../my_model_cache"
     tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
     outputs =  load_outputs(f"../model_output/{output_path}")
-    result_dict = {
-        "dataset": [],
-        "average acc": [],
-        "weighted F1": [],
-        "micro F1": [],
-        "macro F1": [],
-        "OOD count": [],
-        "max token": [],
-        "mean token": [],
-    }
+    result_dict = []
     for dataset_name, outputs_per_dataset in outputs.items():
-        evaluate_output(dataset_name, outputs_per_dataset, tokenizer, result_dict)
+        result_dict.append(evaluate_output(dataset_name, outputs_per_dataset, tokenizer))
 
     result_df = pd.DataFrame(result_dict)
     save_result(result_df, output_path)

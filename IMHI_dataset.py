@@ -4,7 +4,7 @@ import random
 from datasets import Dataset
 
 def extract_prompts(text):
-    tag_pat = re.compile(r'<\s*([^\>]+)\s*>')
+    tag_pat = re.compile(r'<([^\>]+)>')
     matches = list(tag_pat.finditer(text))
     out = {}
     for i, m in enumerate(matches):
