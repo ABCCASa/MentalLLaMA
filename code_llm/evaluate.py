@@ -96,4 +96,4 @@ def main(output_path: str, model_path:str = None):
 
 if __name__ == "__main__":
     #main("Llama-3.1-8B_few_shot", "meta-llama/Llama-3.1-8B-Instruct")
-    main("Llama-2-14B_zero_shot", "meta-llama/Llama-2-13b-chat-hf")
+    main("Llama-2-7B_zero_shot", "meta-llama/Llama-2-7b-chat-hf")

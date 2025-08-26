@@ -2,7 +2,7 @@ import pandas as pd
 import re
 import random
 from datasets import Dataset
-
+import uuid
 def extract_prompts(text):
     tag_pat = re.compile(r'<([^\>]+)>')
     matches = list(tag_pat.finditer(text))
@@ -35,18 +35,21 @@ def get_dataset(dataset_file, prompt_file):
             if ":" in key:
                 key, f_str = key.split(":", 1)
                 key, f_str = key.strip(), f_str.strip()
-                if f_str.startswith(("+", "-")):
-                    idx = (row_index + int(f_str)) % len(df)
-                elif f_str == "r":
-                    idx = random_number_exclude(0, len(df), [row_index])
-                elif f_str.startwith("r"):
-                    if f_str in random_keys.keys():
+
+                if f_str.startwith("r"): # random
+                    if f_str == "r":
+                        idx = random_number_exclude(0, len(df), random_keys.values())
+                        random_keys[str(uuid.uuid4())] = idx
+                    elif f_str in random_keys.keys():
                         idx = random_keys[f_str]
                     else:
                         idx = random_number_exclude(0, len(df), random_keys.values())
                         random_keys[f_str] = idx
-                else:
+                elif f_str.startswith(("+", "-")): # offset
+                    idx = (row_index + int(f_str)) % len(df)
+                else:   # num index
                     idx = int(f_str) % len(df)
+
                 return df[key][idx]
             else:
                 return str(row[key])

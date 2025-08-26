@@ -74,9 +74,9 @@ def evaluate_model(model, dataloader):
     return result_dict
 
 
-def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, valid_data_file: str, test_data_file: str,
-                      prompt_file: str, batch_size: int, device: torch.device, output_dir: str, lr: float, epochs: int,
-                      warmup_ratio: float, max_norm: float):
+def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, valid_data_file: str,
+                      test_data_file: str, prompt_file: str, batch_size: int, max_length: int, device: torch.device,
+                      output_dir: str, lr: float, epochs: int, warmup_ratio: float, max_norm: float):
 
     label_set = IMHI_dataset.get_standard_labels(dataset_name)
 
@@ -89,7 +89,7 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
     test_dataset = IMHI_dataset.get_dataset(test_data_file, prompt_file)
 
     def format_example(ex):
-        out = tokenizer(ex["query"], max_length=512, truncation=True)
+        out = tokenizer(ex["query"], max_length=max_length, truncation=True)
         out["labels"] = label_set.index(ex["label"])
         return out
 
@@ -120,7 +120,7 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
     optimizer = AdamW(model.parameters(), lr=lr)
     num_training_steps = epochs * math.ceil(len(train_loader))
     num_warmup_steps = int(warmup_ratio * num_training_steps)
-    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=num_warmup_steps, num_training_steps=num_training_steps)
+    scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps, num_training_steps)
 
 
     epochs_logs = []
@@ -161,8 +161,9 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
     output = pd.DataFrame(test_dataset, index=None)
     output.to_csv(os.path.join(output_dir, "test_output.csv"), index=False)
 
-def main(model_path:str, train_data_dir: str, valid_data_dir: str, test_data_dir:str, prompt_dir: str, output_dir: str, batch_size: int,
-         device: torch.device, lr: float, epochs: int, warmup_ratio: float, max_norm:float):
+def main(model_path:str, train_data_dir: str, valid_data_dir: str, test_data_dir:str, prompt_dir: str, output_dir: str,
+         batch_size: int, max_length: int, device: torch.device, lr: float, epochs: int, warmup_ratio: float,
+         max_norm:float):
 
     device = torch.device(device)
     for file in os.listdir(train_data_dir):
@@ -182,8 +183,8 @@ def main(model_path:str, train_data_dir: str, valid_data_dir: str, test_data_dir
             print(f"{dataset_name} is already trained, skipping")
             continue
 
-        train_one_dataset(model_path, dataset_name, train_data_file, valid_data_file, test_data_file, prompt_file, batch_size, device,
-                          output_dir_per_dataset, lr, epochs, warmup_ratio, max_norm)
+        train_one_dataset(model_path, dataset_name, train_data_file, valid_data_file, test_data_file, prompt_file,
+                          batch_size, max_length, device, output_dir_per_dataset, lr, epochs, warmup_ratio, max_norm)
 
 
 if __name__ == "__main__":
@@ -196,6 +197,7 @@ if __name__ == "__main__":
     parser.add_argument('--output_dir', type=str)
     parser.add_argument('--device', type=str)
     parser.add_argument('--batch_size', type=int, default=24)
+    parser.add_argument('--max_length', type=int, default=512)
     parser.add_argument('--lr', type=float, default=2e-5)
     parser.add_argument('--epochs', type=int, default=10)
     parser.add_argument('--warmup_ratio', type=float, default=0.08)
@@ -205,5 +207,5 @@ if __name__ == "__main__":
     main(**vars(args))
 
     # cd code_bert
-    # python classifier_train.py --model_path google-bert/bert-base-cased --train_data_dir ../dataset/train --valid_data_dir ../dataset/valid --test_data_dir ../dataset/test --prompt_dir ../prompt_templates/classifier --output_dir ../fine-tuned_model/bert --device cuda --batch_size 32 --epochs 4
+    # python classifier_train.py --model_path google-bert/bert-base-cased --train_data_dir ../dataset/train --valid_data_dir ../dataset/valid --test_data_dir ../dataset/test --prompt_dir ../prompt_templates/classifier --output_dir ../fine-tuned_model/bert --device cuda --batch_size 32 --max_length 512 --epochs 4
 
