@@ -1,0 +1,9 @@
+<query>
+Question: Does the [aspect] mental wellness dimension exist in the post?
+
+Options:
+A. True
+B. False
+
+Post: [post]
+<label>[label]

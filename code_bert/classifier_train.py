@@ -98,36 +98,20 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
     test_tokenized = test_dataset.map(format_example, remove_columns=test_dataset.column_names)
 
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
-    train_loader = DataLoader(
-        train_tokenized,
-        batch_size=batch_size,
-        shuffle=True,
-        collate_fn=data_collator
-    )
-    valid_loader = DataLoader(
-        valid_tokenized,
-        batch_size=batch_size,
-        shuffle=False,
-        collate_fn=data_collator
-    )
-    test_loader = DataLoader(
-        test_tokenized,
-        batch_size=batch_size,
-        shuffle=False,
-        collate_fn=data_collator
-    )
+
+    train_loader = DataLoader(train_tokenized, batch_size=batch_size, shuffle=True, collate_fn=data_collator)
+    valid_loader = DataLoader(valid_tokenized, batch_size=batch_size, shuffle=False, collate_fn=data_collator)
+    test_loader = DataLoader(test_tokenized, batch_size=batch_size, shuffle=False, collate_fn=data_collator)
 
     optimizer = AdamW(model.parameters(), lr=lr)
     num_training_steps = epochs * math.ceil(len(train_loader))
     num_warmup_steps = int(warmup_ratio * num_training_steps)
     scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps, num_training_steps)
 
-
     epochs_logs = []
     print(f"[{dataset_name}] start training")
     for epoch in range(1, epochs+1):
         print(f"Epoch: {epoch}/{epochs}:")
-
         #train
         train_log = train_one_epoch(model, train_loader, optimizer, scheduler, max_norm)
         print(f"    [Train Log]", ", ".join([f"{k}: {v}" for k, v in train_log.items()]))
@@ -143,7 +127,6 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
     test_log = evaluate_model(model, test_loader)
     pred_labels = test_log.pop("output_label")
     print(f"[Test Log]", ", ".join([f"{k}:{v}" for k, v in test_log.items()]))
-
 
     # save model
     model.save_pretrained(output_dir)
@@ -200,7 +183,7 @@ if __name__ == "__main__":
     parser.add_argument('--max_length', type=int, default=512)
     parser.add_argument('--lr', type=float, default=2e-5)
     parser.add_argument('--epochs', type=int, default=10)
-    parser.add_argument('--warmup_ratio', type=float, default=0.08)
+    parser.add_argument('--warmup_ratio', type=float, default=0.06)
     parser.add_argument('--max_norm', type=float, default=1)
 
     args = parser.parse_args()

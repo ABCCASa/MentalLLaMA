@@ -1,18 +1,14 @@
 import os
 import sys
-
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
+parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 if parent_dir not in sys.path:
     print(f"Adding '{parent_dir}' to PYTHONPATH")
     sys.path.append(parent_dir)
-
 import pandas as pd
 import our_metrics
 from typing import List
 from transformers import AutoTokenizer
 from huggingface_hub import login
-
 import IMHI_dataset
 
 def load_outputs(root):
@@ -45,7 +41,6 @@ def extract_label_index(text, valid_labels: List):
 def get_label_index(label: str, all_labels: List):
     return all_labels.index(label)
 
-
 def evaluate_output(dataset_name, output_df, tokenizer):
     golden_label_index = []
     output_label_index = []
@@ -75,7 +70,6 @@ def evaluate_output(dataset_name, output_df, tokenizer):
     print(", ".join([f"{k}: {v}" for k, v in result_dict.items()]))
     return result_dict
 
-
 def save_result(result_df, output_path):
     os.makedirs("../model_result/", exist_ok=True)
     result_df.to_csv(f"../model_result/{output_path}.csv",  index=False)
@@ -96,4 +90,4 @@ def main(output_path: str, model_path:str = None):
 
 if __name__ == "__main__":
     #main("Llama-3.1-8B_few_shot", "meta-llama/Llama-3.1-8B-Instruct")
-    main("Llama-2-7B_zero_shot", "meta-llama/Llama-2-7b-chat-hf")
+    main("Qwen2.5-7B_few_shot", "Qwen/Qwen2.5-7B-Instruct")
