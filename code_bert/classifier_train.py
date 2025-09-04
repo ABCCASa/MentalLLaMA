@@ -90,12 +90,12 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
 
     def format_example(ex):
         out = tokenizer(ex["query"], max_length=max_length, truncation=True)
-        out["labels"] = label_set.index(ex["label"])
+        out["labels"] = [label_set.index(label) for label in ex["label"]]
         return out
 
-    train_tokenized = train_dataset.map(format_example,  remove_columns=train_dataset.column_names)
-    valid_tokenized = valid_dataset.map(format_example, remove_columns=valid_dataset.column_names)
-    test_tokenized = test_dataset.map(format_example, remove_columns=test_dataset.column_names)
+    train_tokenized = train_dataset.map(format_example,  remove_columns=train_dataset.column_names, batched=True)
+    valid_tokenized = valid_dataset.map(format_example, remove_columns=valid_dataset.column_names, batched=True)
+    test_tokenized = test_dataset.map(format_example, remove_columns=test_dataset.column_names, batched=True)
 
     data_collator = DataCollatorWithPadding(tokenizer=tokenizer)
 

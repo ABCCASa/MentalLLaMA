@@ -30,6 +30,7 @@ def generate_batch_responses(model, tokenizer, datas, max_length):
     else:
         messages = datas["query"]
 
+
     model_inputs = tokenizer(messages, return_tensors="pt", padding=True).to(model.device)
 
     with torch.inference_mode():

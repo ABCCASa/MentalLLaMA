@@ -3,6 +3,9 @@ import re
 import random
 from datasets import Dataset
 import uuid
+import os
+from datasets import concatenate_datasets
+
 def extract_prompts(text):
     tag_pat = re.compile(r'<([^\>]+)>')
     matches = list(tag_pat.finditer(text))
@@ -18,6 +21,27 @@ def random_number_exclude(start, end, exclude):
     # [start, end)
     choices = [i for i in range(start, end) if i not in exclude]
     return random.choice(choices)
+
+
+def get_full_dataset(dataset_dir, prompt_dir, include = None):
+    datasets = []
+    dataset_names = []
+    for file in os.listdir(dataset_dir):
+        if not file.endswith(".csv"):
+            continue
+
+        dataset_name = file.split('.')[0]
+        if include is not None and dataset_name not in include:
+            continue
+        dataset_file = os.path.join(dataset_dir, file)
+        prompt_file = os.path.join(prompt_dir, f"{dataset_name}.txt")
+        dataset = get_dataset(dataset_file, prompt_file)
+        dataset = dataset.add_column("dataset_name", [dataset_name]*len(dataset))
+
+        datasets.append(dataset)
+        dataset_names.append(dataset_name)
+    return concatenate_datasets(datasets), dataset_names
+
 
 def get_dataset(dataset_file, prompt_file):
     with open(prompt_file, "r", encoding="utf-8") as f:
