@@ -1,11 +1,6 @@
-import pandas as pd
 import torch
-from transformers import AutoTokenizer, AutoModelForCausalLM, DataCollatorWithPadding,  get_linear_schedule_with_warmup
+from transformers import AutoTokenizer, AutoModelForCausalLM
 import argparse
-from torch.utils.data import DataLoader
-import json
-import math
-from torch.optim import AdamW
 from trl import SFTConfig, SFTTrainer
 import sys
 import os
@@ -15,8 +10,7 @@ if parent_dir not in sys.path:
     print(f"Adding '{parent_dir}' to PYTHONPATH")
     sys.path.append(parent_dir)
 import IMHI_dataset
-
-
+from peft import LoraConfig, get_peft_model
 
 
 def main(model_path:str, train_data_dir: str, valid_data_dir:str, prompt_dir: str, output_dir: str, device: torch.device, print_freq: int):
@@ -41,22 +35,29 @@ def main(model_path:str, train_data_dir: str, valid_data_dir:str, prompt_dir: st
     cache_dir = "../my_model_cache"
     tokenizer = AutoTokenizer.from_pretrained(model_path, cache_dir=cache_dir)
     model = AutoModelForCausalLM.from_pretrained(model_path, cache_dir=cache_dir, torch_dtype=torch.bfloat16).to(device)
+
+    lora_config = LoraConfig(
+        r=16, lora_alpha=32, lora_dropout=0.05, bias="none", task_type="CAUSAL_LM",
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+    )
+
+
     model.train()
     training_args = SFTConfig(
         output_dir=output_dir,
-        num_train_epochs=10 ,
-        per_device_train_batch_size = 6,
-        per_device_eval_batch_size = 6,
+        num_train_epochs=10,
+        per_device_train_batch_size = 8,
+        per_device_eval_batch_size = 8,
         learning_rate=1e-5,
-        gradient_accumulation_steps=6,
+        gradient_accumulation_steps=32,
         warmup_ratio =0.03,
         logging_steps=print_freq,
         save_strategy = "epoch",
         eval_strategy= "epoch",
         save_total_limit = 2,
-        completion_only_loss =True,
         max_length= 2048,
-        packing =False
+        packing =False,
+        #completion_only_loss=False
     )
 
     # Initialize trainer
@@ -64,6 +65,7 @@ def main(model_path:str, train_data_dir: str, valid_data_dir:str, prompt_dir: st
         model=model,
         args=training_args,
         train_dataset=train_dataset,
+        peft_config=lora_config,
         eval_dataset=valid_dataset,
         processing_class=tokenizer,
     )
@@ -87,5 +89,5 @@ if __name__ == "__main__":
     main(**vars(args))
 
     # cd code_llm
-    # python train.py --model_path meta-llama/Llama-3.2-1B-Instruct --train_data_dir ../dataset/train --valid_data_dir ../dataset/valid --prompt_dir ../prompt_templates/QA --output_dir ../fine-tuned_model/llama-3.2-1B --device cuda --print_freq 5
+    # CUDA_VISIBLE_DEVICES=6 python train.py --model_path meta-llama/Llama-3.2-1B-Instruct --train_data_dir ../dataset/train --valid_data_dir ../dataset/valid --prompt_dir ../prompt_templates/QA --output_dir ../fine-tuned_model/llama-3.2-1B --device cuda --print_freq 5
 

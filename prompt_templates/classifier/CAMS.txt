@@ -1,2 +1,2 @@
-<query>[post]
-<label>[label]
+<query>{post}
+<label>{label}

@@ -1,9 +1,0 @@
-<query>
-Question: Does the poster suffer from stress?
-
-Options:
-A. True
-B. False
-
-Post: [post]
-<label>[label]

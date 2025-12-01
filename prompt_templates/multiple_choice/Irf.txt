@@ -1,9 +1,0 @@
-<query>
-Question: Does the post show risks of [aspect]?
-
-Options:
-A. True
-B. False
-
-Post: [post]
-<label>[label]

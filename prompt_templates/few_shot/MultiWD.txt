@@ -5,23 +5,23 @@ The final answer should select from: True, False.
 
 Here is a example:
 Here are some examples:
-Post: [post:+6]
-Aspect: [aspect:+6]
-Response: Let's think step by step: [reason:+6]
-Answer: [label:+6]
+Post: {post:+6}
+Aspect: {aspect:+6}
+Response: Let's think step by step: {reason:+6}
+Answer: {label:+6}
 
-Post: [post:+7]
-Aspect: [aspect:+7]
-Response: Let's think step by step: [reason:+7]
-Answer: [label:+7]
+Post: {post:+7}
+Aspect: {aspect:+7}
+Response: Let's think step by step: {reason:+7}
+Answer: {label:+7}
 
-Post: [post:+8]
-Aspect: [aspect:+8]
-Response: Let's think step by step: [reason:+8]
-Answer: [label:+8]
+Post: {post:+8}
+Aspect: {aspect:+8}
+Response: Let's think step by step: {reason:+8}
+Answer: {label:+8}
 
-Post: [post]
-Aspect: [aspect]
+Post: {post}
+Aspect: {aspect}
 Response: Let's think step by step:
 
-<label>[label]
+<label>{label}

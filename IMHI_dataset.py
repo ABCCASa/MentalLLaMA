@@ -79,7 +79,7 @@ def get_dataset(dataset_file, prompt_file):
                 return str(row[key])
 
         for k, v in template_prompts.items():
-            dataset[k].append( re.sub(r"\[([^\]]+)\]", replace_placeholder, v))
+            dataset[k].append( re.sub(r"\{([^\]]+)\}", replace_placeholder, v))
 
     return Dataset.from_dict(dataset)
 
