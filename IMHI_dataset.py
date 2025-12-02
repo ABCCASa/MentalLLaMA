@@ -43,7 +43,7 @@ def get_full_dataset(dataset_dir, prompt_dir, include = None):
     return concatenate_datasets(datasets), dataset_names
 
 
-def get_dataset(dataset_file, prompt_file):
+def get_dataset(dataset_file, prompt_file, functions=None):
     with open(prompt_file, "r", encoding="utf-8") as f:
         template_prompt = f.read()
         template_prompts = extract_prompts(template_prompt)
@@ -56,9 +56,14 @@ def get_dataset(dataset_file, prompt_file):
 
         def replace_placeholder(match):
             key = match.group(1).strip()
+
             if ":" in key:
                 key, f_str = key.split(":", 1)
                 key, f_str = key.strip(), f_str.strip()
+
+                if key.startswith("@"):
+                    params = [str(row[k]) for k in f_str.strip(",").strip()]
+                    return functions[key[1:]](*params)
 
                 if f_str.startwith("r"): # random
                     if f_str == "r":
@@ -73,10 +78,12 @@ def get_dataset(dataset_file, prompt_file):
                     idx = (row_index + int(f_str)) % len(df)
                 else:   # num index
                     idx = int(f_str) % len(df)
-
                 return df[key][idx]
             else:
-                return str(row[key])
+                if key.startswith("@"):
+                    return functions[key[1:]]()
+                else:
+                    return str(row[key])
 
         for k, v in template_prompts.items():
             dataset[k].append( re.sub(r"\{([^\]]+)\}", replace_placeholder, v))

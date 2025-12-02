@@ -30,3 +30,4 @@ Aspect: {aspect}
 Response: Let's think step by step:
 
 <label>{label}
+<reason>{reason}

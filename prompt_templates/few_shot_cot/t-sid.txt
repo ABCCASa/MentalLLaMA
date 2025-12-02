@@ -1,7 +1,7 @@
 <query>
-You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+You will be presented with a post that possibly shows mental disorders, and you need to identify the type of the mental disorder
 Think step by step, before get the final answer.
-The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+The final answer should select from: No mental disorder, Depression, Suicide or self-harm, PTSD.
 
 Here are some examples:
 Post: {post:+1}
@@ -20,3 +20,4 @@ Post: {post}
 Response: Let's think step by step:
 
 <label>{label}
+<reason>{reason}

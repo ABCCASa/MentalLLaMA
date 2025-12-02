@@ -6,3 +6,4 @@ Post: {post}
 Answer:
 
 <label>{label}
+<reason>{reason}
