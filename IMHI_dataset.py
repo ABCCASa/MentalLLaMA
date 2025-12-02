@@ -61,7 +61,7 @@ def get_dataset(dataset_file, prompt_file, functions=None):
                 key, f_str = key.split(":", 1)
                 key, f_str = key.strip(), f_str.strip()
 
-                if key.startswith("@"):
+                if key.startswith("@"): #function call
                     params = [str(row[k]) for k in f_str.strip(",").strip()]
                     return functions[key[1:]](*params)
 
@@ -79,11 +79,12 @@ def get_dataset(dataset_file, prompt_file, functions=None):
                 else:   # num index
                     idx = int(f_str) % len(df)
                 return df[key][idx]
-            else:
-                if key.startswith("@"):
-                    return functions[key[1:]]()
-                else:
-                    return str(row[key])
+
+
+            if key.startswith("@"): #function call
+                return functions[key[1:]]()
+
+            return str(row[key])
 
         for k, v in template_prompts.items():
             dataset[k].append( re.sub(r"\{([^\]]+)\}", replace_placeholder, v))
