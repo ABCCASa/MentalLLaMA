@@ -1,0 +1,306 @@
+query,label,reason,response,model_input,llm_label,llm_explain
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: how the coronavirus could damage the US economy
+Label:
+Explanation:",financial problem,"The post mentions the potential damage that the coronavirus could cause to the US economy. This suggests that the poster is concerned about the financial implications of the pandemic, such as job loss, market downturns, and economic instability. Therefore, the appropriate label for this post is Financial Problem."," Sure, I can help you with that!
+
+Label: Economic impact
+
+Explanation: The post is highlighting the potential damage the coronavirus could cause to the US economy, including disruptions to supply chains, decreased consumer spending, and losses in productivity. This could lead to a decline in economic growth and potentially even a recession.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: how the coronavirus could damage the US economy
+Label:
+Explanation: [/INST]",,
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: work in general and searching the real estate market.
+Label:
+Explanation:",work,"The post explicitly mentions work as a source of stress, indicating that the poster is experiencing stress related to their job. Additionally, the post mentions searching the real estate market, which suggests that the stress is also related to their work. Therefore, the appropriate label for this post is Work."," Sure, I can help you identify the cause of stress based on the given post.
+
+Label: Work
+
+Explanation: The post mentions ""work in general"" and ""searching the real estate market,"" which could suggest that the person is feeling stressed at work or due to work-related responsibilities. This could include tasks, deadlines, workload, or conflicts with colleagues or supervisors. Additionally, the real estate market can be a significant source of stress, especially when it comes to making important decisions or dealing with financial pressures.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: work in general and searching the real estate market.
+Label:
+Explanation: [/INST]",,
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: i have been wanting to find another job for some time now
+Label:
+Explanation:",work,The post explicitly mentions that the poster has been wanting to find another job for some time now. This indicates that they are not satisfied with their current job and are experiencing stress in relation to their work situation.," Sure! Based on the information provided in the post, I would label the cause of stress as ""Work"". Here's why:
+
+1. Label: Work
+2. Explanation: The post mentions that the person has been wanting to find another job for some time now, which suggests that they are feeling stressed or unhappy with their current job. This could be due to various reasons such as lack of challenge, poor work-life balance, unsupportive colleagues or supervisors, or a lack of growth opportunities.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: i have been wanting to find another job for some time now
+Label:
+Explanation: [/INST]",,
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: The usual stressor in my life.
+Label:
+Explanation:",everyday decision making,"In this case, the post mentions that there is a ""usual stressor"" in the poster's life but does not provide any specific details about what that stressor is. Since it is mentioned as a common occurrence, it suggests that the stressor may be related to everyday decision making. Everyday decision making involves the need to make choices and navigate various situations on a daily basis, which can contribute to stress. Without any further information, everyday decision making seems to be the most appropriate label for this post."," Sure, I can help you identify the cause of stress based on the given post.
+
+Label: School
+
+Explanation: Based on the post, it seems that the person is experiencing stress related to their studies or academic life. This could include things like exams, assignments, coursework, or other academic demands.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: The usual stressor in my life.
+Label:
+Explanation: [/INST]",school,"Based on the post, it seems that the person is experiencing stress related to their studies or academic life."
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: i have been very stressed out by all the bad drivers near my house.
+Label:
+Explanation:",work,"The post mentions being stressed out by bad drivers near the poster's house. While bad drivers are not typically associated with work, it is possible that the poster is stressed because they have to commute to work and deal with these bad drivers on a daily basis. Therefore, the appropriate label in this case would be Work, as it is directly related to the stressor mentioned in the post."," Sure! Based on the post, I would identify the cause of stress as ""Everyday decision making.""
+
+1. Label: Everyday decision making
+2. Explanation: The post mentions being stressed out by ""all the bad drivers near my house,"" which suggests that the person is feeling overwhelmed or frustrated by the constant need to navigate through a challenging driving environment. This could be due to the sheer volume of traffic, aggressive drivers, or other factors that make daily commutes stressful.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: i have been very stressed out by all the bad drivers near my house.
+Label:
+Explanation: [/INST]",,
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: In bad news my sister has tested positive for ovarian cancer..my family is devastated.
+Label:
+Explanation:",family issues,"The post mentions that the poster's sister has tested positive for ovarian cancer, which is a significant health issue that affects the entire family. This news is causing devastation within the family, indicating that the stress is primarily related to family issues. Although health issues could also be a relevant label, the mention of the family's devastation suggests that the focus of the stress is on the impact this diagnosis has on the family as a whole. Therefore, the appropriate label for this post is Family Issues."," Label: Family issues
+
+Explanation: The cause of the stress in this situation is the diagnosis of ovarian cancer in the sister, which has devastated the family. This is a significant and emotional event that can impact the family's dynamics, relationships, and overall well-being.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: In bad news my sister has tested positive for ovarian cancer..my family is devastated.
+Label:
+Explanation: [/INST]",,
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: raising a  teenage girl  can be stressful
+Label:
+Explanation:",financial problem,"The post mentions that raising a teenage girl can be stressful. While this could potentially fall under the category of family issues, the mention of financial problem suggests that the stress is specifically related to the financial aspects of raising a teenager. Raising a teenager often involves additional expenses such as education, extracurricular activities, clothing, and other needs. Therefore, the appropriate label in this case is financial problem."," Sure, I can help you with that! Based on the given post, the likely cause of stress is:
+
+Label: Family issues
+
+Explanation: Raising a teenage girl can be stressful due to the various challenges that come with parenting a preteen or teenager, such as navigating their emotional ups and downs, dealing with peer pressure and social media, and ensuring their physical and emotional well-being. Family issues can also contribute to stress in this situation, such as conflicts within the family or financial strain.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: raising a  teenage girl  can be stressful
+Label:
+Explanation: [/INST]",,
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: yeh, we talked for like 10 minutes but had to go cuz i had to finish work at starbucks.
+Label:
+Explanation:",everyday decision making,The post mentions having to end a conversation because of needing to finish work at Starbucks. This suggests that the poster is experiencing stress due to having to make a decision between spending time talking and completing work. This falls under the category of everyday decision making as a stress cause.," Sure, I can help you identify the cause of stress in the given post!
+
+Label: Everyday decision making
+
+Explanation: The cause of stress in this post is the need to balance work and personal life. The person has to finish work at Starbucks, indicating that they have work-related responsibilities that they need to attend to, but they also had to talk for 10 minutes with someone. This can be a common cause of stress in many people's lives, as it can be difficult to manage the demands of work, personal relationships, and other responsibilities.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: yeh, we talked for like 10 minutes but had to go cuz i had to finish work at starbucks.
+Label:
+Explanation: [/INST]",everyday decision making,"The cause of stress in this post is the need to balance work and personal life. The person has to finish work at Starbucks, indicating that they have work-related responsibilities that they need to attend to, but they also had to talk for 10 minutes with someone. This can be a common cause of stress in many people's lives, as it can be difficult to manage the demands of work, personal relationships, and other responsibilities."
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: work, it has been a stressful week! hope it gets better
+Label:
+Explanation:",work,"The post explicitly mentions work as the cause of stress, stating that it has been a stressful week. This indicates that the poster is currently experiencing stress related to their work. The hope for it to get better further emphasizes work as the cause of stress, as the poster is expressing the desire for improvement in their work situation."," Sure, I can help you with that! Based on the given post, the likely cause of the stress is:
+
+Label: Work
+
+Explanation: The post mentions that it has been a stressful week, which suggests that the stress is related to work-related issues. It's possible that the person is dealing with a heavy workload, a difficult boss or coworker, or a specific project that is causing them stress.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: work, it has been a stressful week! hope it gets better
+Label:
+Explanation: [/INST]",,
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: It's so hard with school and stuff.
+Label:
+Explanation:",school,"The post specifically mentions school as one of the factors contributing to the poster's stress. This strongly suggests that the stress is related to academic work or responsibilities, which falls under the category of School as a stress cause. While there may be other factors contributing to the poster's stress, the direct mention of school indicates that it is the primary cause in this instance."," Sure, I can help you identify the cause of stress based on the given post.
+
+Label: School
+
+Explanation: The post mentions ""school and stuff,"" which suggests that the stress is related to academic responsibilities or other school-related issues. This could include things like homework, exams, projects, or social pressures related to school.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: It's so hard with school and stuff.
+Label:
+Explanation: [/INST]",,
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: i'm cooking dinner for the inlaws tonight.  why bother they hate me?
+Label:
+Explanation:",family issues,"The post mentions cooking dinner for the in-laws and expresses feelings of negativity, specifically that they hate the poster. This indicates that the poster is experiencing stress related to their family relationships and the dynamics with their in-laws. This falls under the category of Family Issues as a stress cause."," Label: Family issues
+
+Explanation: The person is feeling stressed about cooking dinner for their in-laws because they have a negative relationship with them. The person may feel disliked or resentful towards their in-laws, which can make cooking for them a source of stress and anxiety.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: i'm cooking dinner for the inlaws tonight.  why bother they hate me?
+Label:
+Explanation: [/INST]",,
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: The craziness surrounding the coronavirus and not knowing what's going to happen
+Label:
+Explanation:",other causes,"The post mentions the coronavirus and not knowing what's going to happen as the cause of stress. While this can be categorized under health issues or emotional turmoil, the term ""Other causes"" is more appropriate in this case because the post does not specifically mention personal health concerns or intense emotional distress. Instead, it highlights the general uncertainty and chaos surrounding the coronavirus situation, which falls under the category of other causes of stress."," Sure, I can help you identify the cause of stress based on the given post.
+
+Label: Other causes
+
+Explanation: The cause of stress in this case is the uncertainty and unpredictability of the situation. The coronavirus pandemic has caused widespread disruption and chaos, and the lack of clarity about what the future holds can be very stressful. This is an example of an ""other cause"" of stress, as it is not specifically related to any of the other common causes of stress (such as financial problems, family issues, social relationships, work, health issues, emotional turmoil, or everyday decision making).","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: The craziness surrounding the coronavirus and not knowing what's going to happen
+Label:
+Explanation: [/INST]",other causes,"The cause of stress in this case is the uncertainty and unpredictability of the situation. The coronavirus pandemic has caused widespread disruption and chaos, and the lack of clarity about what the future holds can be very stressful. This is an example of an 'other cause' of stress, as it is not specifically related to any of the other common causes of stress (such as financial problems, family issues, social relationships, work, health issues, emotional turmoil, or everyday decision making)."
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: what's happening after this school year is scaring me.
+Label:
+Explanation:",other causes,"The post mentions that the future after the school year is scaring the poster. It does not provide any specific information about the cause of this fear or stress. It could be related to any number of factors such as uncertainty about future plans, fear of failure, or anxiety about upcoming changes. Since the post does not specify a particular cause, we can categorize it as an ""other cause"" of stress."," Sure, I can help you identify the cause of the stress based on the given post.
+
+Label: School
+
+Explanation: The post mentions ""this school year"" which implies that the stress is related to academic or school-related issues. It could be related to exams, assignments, grades, or any other school-related task that is causing anxiety or worry.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: what's happening after this school year is scaring me.
+Label:
+Explanation: [/INST]",school,"The post mentions 'this school year' which implies that the stress is related to academic or school-related issues. It could be related to exams, assignments, grades, or any other school-related task that is causing anxiety or worry."
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: my foot got stepped on and is now bruised.
+Label:
+Explanation:",health issues,"The post mentions that the poster's foot got stepped on and is now bruised. This indicates a physical injury, which falls under the category of health issues. While this may not be a major health issue, it is still a cause of stress due to pain, discomfort, and potential limitations in mobility. Hence, the appropriate label for this post is Health issues."," Sure! Based on the information provided in the post, I would identify the cause of stress as ""Accident or Injury.""
+
+Label: Accident or Injury
+
+Explanation: The post mentions that the person's foot got stepped on and is now bruised, which is a physical injury that can cause stress and discomfort.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: my foot got stepped on and is now bruised.
+Label:
+Explanation: [/INST]",,
+"You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: nothing
+Label:
+Explanation:",other causes,"The post simply states ""nothing,"" without any further information or context. As a result, it is difficult to determine the specific cause of the stress. Since the post does not mention any specific stressors such as work, school, family issues, etc., we can infer that the cause of stress is some other unknown factor, leading to the label of ""Other causes."""," Based on the information provided, I would label the cause of stress as ""Other causes."" The post does not provide any specific information or context that would suggest a particular cause of stress, such as financial problems, family issues, social relationships, work, health issues, emotional turmoil, or everyday decision making. Therefore, the most appropriate label is ""Other causes,"" as it acknowledges that there could be any number of factors contributing to the stress without providing any further specific information.","<s>[INST] You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: nothing
+Label:
+Explanation: [/INST]",,

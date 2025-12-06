@@ -1,0 +1,13 @@
+<query>
+You will be presented with a post, and you need to identify whether the poster suffers from stress.
+
+Output Structure:
+1) Label: choose exactly one from: True, False.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: {post}
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}

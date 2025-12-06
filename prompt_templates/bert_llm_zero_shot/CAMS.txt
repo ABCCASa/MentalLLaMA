@@ -1,0 +1,16 @@
+<query>
+You will be presented with a post that shows mental disorders, and you need to identify the cause of the mental disorders.
+
+You will also be given the result of a classifier over the labels. Treat this result as a helpful reference, not as ground truth.
+
+Output Structure:
+1) Label: choose exactly one from: None, Bias or abuse, Jobs and career, Medication, Relationship, Alienation.
+2) Explanation: a concise, plain-language explanation about your decision. Only use information from the Post. Do NOT talk about the classifier or its result.
+
+Post: {post}
+Classifier: {@bert:post}
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}

@@ -1,0 +1,16 @@
+<query>
+You will be presented with a post, and you need to identify whether the wellness dimension of {aspect} exists in the post according to Dunn’s model of psychological wellness.
+
+You will also be given the result of a classifier over the labels. Treat this result as a helpful reference, not as ground truth.
+
+Output Structure:
+1) Label: choose exactly one from: True, False.
+2) Explanation: a concise, plain-language explanation about your decision. Only use information from the Post. Do NOT talk about the classifier or its result.
+
+Post: {post}
+Classifier: {@bert:aspect,post}
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}

@@ -1,0 +1,17 @@
+<query>
+You will be presented with a post that shows mental disorders, and you need to identify the cause of the mental disorders.
+
+Output Structure:
+1) Label: choose exactly one from: None, Bias or abuse, Jobs and career, Medication, Relationship, Alienation.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: {post:+1}
+Label: {label:+1}
+Explanation: {reason:+1}
+
+Post: {post}
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}

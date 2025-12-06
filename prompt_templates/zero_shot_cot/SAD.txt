@@ -1,9 +1,17 @@
 <query>
 You will be presented with a post that shows stress, and you need to identify the cause of the stress.
-Think step by step, before get the final answer.
-The final answer should select from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+
+First, briefly think step by step, then provide your final answer.
+
+Output Structure:
+1) Reasoning: think step by step and write your reasoning briefly.
+2) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+3) Explanation: a concise, plain-language explanation about your decision.
+
 Post: {post}
-Answer:
+Reasoning:
+Label:
+Explanation:
 
 <label>{label}
 <reason>{reason}

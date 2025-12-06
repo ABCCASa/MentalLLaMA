@@ -90,7 +90,7 @@ def train_one_dataset(model_path: str, dataset_name: str, train_data_file: str, 
 
     def format_example(ex):
         out = tokenizer(ex["query"], max_length=max_length, truncation=True)
-        out["labels"] = [label_set.index(label) for label in ex["label"]]
+        out["labels"] = [label_set.index(label.lower()) for label in ex["label"]]
         return out
 
     train_tokenized = train_dataset.map(format_example,  remove_columns=train_dataset.column_names, batched=True)
@@ -190,5 +190,5 @@ if __name__ == "__main__":
     main(**vars(args))
 
     # cd code_bert
-    # python classifier_train.py --model_path google-bert/bert-base-cased --train_data_dir ../dataset/train --valid_data_dir ../dataset/valid --test_data_dir ../dataset/test --prompt_dir ../prompt_templates/classifier --output_dir ../fine-tuned_model/bert --device cuda --batch_size 32 --max_length 512 --epochs 4
+    # python classifier_train.py --model_path google-bert/bert-base-cased --train_data_dir ../dataset/train --valid_data_dir ../dataset/valid --test_data_dir ../dataset/test --prompt_dir ../prompt_templates/classifier_with_label --output_dir ../fine-tuned_model/bert --device cuda --batch_size 32 --max_length 512 --epochs 4
 

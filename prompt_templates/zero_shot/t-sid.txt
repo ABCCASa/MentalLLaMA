@@ -1,0 +1,12 @@
+<query>
+You will be presented with a post that possibly shows mental disorders, and you need to identify the type of the mental disorder.
+Output Structure:
+1) Label: choose exactly one from: No mental disorder, Depression, Suicide or self-harm, PTSD.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: {post}
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}

@@ -1,0 +1,13 @@
+<query>
+You will be presented with a post that possibly shows mental disorders, and you need to identify what mental disorder symptoms does this post show.
+
+Output Structure:
+1) Label: choose exactly one from: No mental disorder, Suicide, Depression, Anxiety, Bipolar.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: {post}
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}

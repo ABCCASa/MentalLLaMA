@@ -1,0 +1,20 @@
+<query>
+You will be presented with a post that possibly shows mental disorders, and you need to identify the type of the mental disorder.
+
+You will also be given the result of a classifier over the labels. Treat this result as a helpful reference, not as ground truth.
+
+First, briefly think step by step, then provide your final answer.
+
+Output Structure:
+1) Reasoning: think step by step and write your reasoning briefly.
+2) Label: choose exactly one from: No mental disorder, Depression, Suicide or self-harm, PTSD.
+3) Explanation: a concise, plain-language explanation about your decision. Only use information from the Post. Do NOT talk about the classifier or its result.
+
+Post: {post}
+Classifier: {@bert:post}
+Reasoning:
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}

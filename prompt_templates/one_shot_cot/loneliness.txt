@@ -1,0 +1,21 @@
+<query>
+You will be presented with a post, and you need to identify whether the poster suffers from loneliness.
+
+First, briefly think step by step, then provide your final answer.
+
+Output Structure:
+1) Reasoning: think step by step and write your reasoning briefly.
+2) Label: choose exactly one from: True, False.
+3) Explanation: a concise, plain-language explanation about your decision.
+
+Post: {post:+1}
+Label: {label:+1}
+Explanation: {reason:+1}
+
+Post: {post}
+Reasoning:
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}

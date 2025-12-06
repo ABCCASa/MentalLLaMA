@@ -1,0 +1,17 @@
+<query>
+You will be presented with a post, and you need to identify whether the wellness dimension of {aspect} exists in the post according to Dunn’s model of psychological wellness.
+
+Output Structure:
+1) Label: choose exactly one from: True, False.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: {post:+6}
+Label: {label:+6}
+Explanation: {reason:+6}
+
+Post: {post}
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}

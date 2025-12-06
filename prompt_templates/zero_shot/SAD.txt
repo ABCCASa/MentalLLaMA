@@ -1,0 +1,13 @@
+<query>
+You will be presented with a post that shows stress, and you need to identify the cause of the stress.
+
+Output Structure:
+1) Label: choose exactly one from: School, Financial problem, Family issues, Social relationships, Work, Health issues, Emotional turmoil, Everyday decision making, Other causes.
+2) Explanation: a concise, plain-language explanation about your decision.
+
+Post: {post}
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}

@@ -17,7 +17,6 @@ import time
 import gc
 from IMHI_dataset import get_dataset
 
-
 def generate_batch_responses(model, tokenizer, datas, max_length):
     if getattr(tokenizer, "chat_template", None):
         if "system" in datas.keys():
@@ -53,12 +52,11 @@ def generate_responses_for_dataset(model, tokenizer, dataset, dataset_name, batc
         model_inputs += batch_model_inputs
         progress += 1
         if progress % print_freq == 0 or progress == 1 or progress == total_batch:
-            print(batch_model_inputs[i], batch_responses[0])
+            print(batch_model_inputs[0], batch_responses[0])
             print(f"[{dataset_name}] {progress}/{total_batch}, {int(time.time()-start_time)}s\n")
     gc.collect()
     torch.cuda.empty_cache()
     return model_inputs, responses
-
 
 def inference_one_dataset(model, tokenizer, dataset_name, dataset_file, prompt_file, output_file, batch_size: int, max_length, print_freq):
     dataset = get_dataset(dataset_file, prompt_file)
@@ -81,9 +79,6 @@ def inference_one_dataset(model, tokenizer, dataset_name, dataset_file, prompt_f
 def main(model_path: str, data_dir: str, prompt_dir: str, output_dir: str, device: str, batch_size: int,
          max_length:int , print_freq: int):
 
-    # login hugging face
-    if input('Enter "y" if you want login: ') == "y":
-        login()
 
     # load tokenizer and model
     device = torch.device(device)
@@ -121,11 +116,11 @@ def main(model_path: str, data_dir: str, prompt_dir: str, output_dir: str, devic
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--model_path', type=str)
-    parser.add_argument('--data_dir', type=str)
+    parser.add_argument('--data_dir', type=str, default="../dataset/test")
     parser.add_argument('--prompt_dir', type=str)
     parser.add_argument('--output_dir', type=str)
-    parser.add_argument('--device', type=str)
-    parser.add_argument('--batch_size', type=int, default=24)
+    parser.add_argument('--device', type=str, default="cuda")
+    parser.add_argument('--batch_size', type=int, default=32)
     parser.add_argument('--print_freq', type=int, default=5)
     parser.add_argument('--max_length', type=int, default=5000)
     args = parser.parse_args()
@@ -135,5 +130,5 @@ if __name__ == "__main__":
 
 
     # cd code_llm
-    # python inference.py --model_path Qwen/Qwen3-0.6B --data_dir ../dataset/test --prompt_dir ../prompt_templates/zero_shot --output_dir ../model_output/Qwen3-0.6B_zero_shot  --device cuda --batch_size 24 --max_length 5000 --print_freq 5
+    # python inference.py --model_path meta-llama/Llama-3.1-8B-Instruct --prompt_dir ../prompt_templates/zero_shot --output_dir ../model_output/Llama-3.1-8B_zero_shot
 

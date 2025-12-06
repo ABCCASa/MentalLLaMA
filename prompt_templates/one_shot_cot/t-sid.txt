@@ -1,0 +1,21 @@
+<query>
+You will be presented with a post that possibly shows mental disorders, and you need to identify the type of the mental disorder.
+
+First, briefly think step by step, then provide your final answer.
+
+Output Structure:
+1) Reasoning: think step by step and write your reasoning briefly.
+2) Label: choose exactly one from: No mental disorder, Depression, Suicide or self-harm, PTSD.
+3) Explanation: a concise, plain-language explanation about your decision.
+
+Post: {post:+1}
+Label: {label:+1}
+Explanation: {reason:+1}
+
+Post: {post}
+Reasoning:
+Label:
+Explanation:
+
+<label>{label}
+<reason>{reason}
