@@ -24,15 +24,17 @@ def evaluate_output(dataset_name, df, llm:LLM, batch_size, retry_count):
     contents = []
     for index, row in df.iterrows():
         contents.append(row["response"])
-    structures= llm.batch_structured_output(contents, 10000, IMHI_dataset.get_noneable_model(dataset_name), batch_size, retry_count=retry_count)
-    for structure in structures:
+    structures,counts = llm.batch_structured_output(contents, 1500, IMHI_dataset.get_noneable_model(dataset_name), batch_size, retry_count=retry_count)
+    for structure, tc in zip(structures, counts):
         if structure is not None:
             llm_label.append(structure["label"])
             llm_explain.append(structure["explanation"])
+
         else:
             llm_label.append(None)
             llm_explain.append(None)
 
+    df["try_count"] = counts
     df["llm_label"] = llm_label
     df["llm_explain"] = llm_explain
     return df
@@ -42,6 +44,10 @@ def main(data_path: str, model_path:str, batch_size: int, retry_count:int):
     llm = LLM(model_path, "cuda", cache_dir)
     os.makedirs(f"../model_struct_output/{data_path}/", exist_ok=True)
     for dataset_name, outputs_per_dataset in load_outputs(f"../model_output/{data_path}").items():
+        if os.path.exists(f"../model_struct_output/{data_path}/{dataset_name}.csv"):
+            print(f"{dataset_name} exist, skip")
+            continue
+        print(f"start dataset{dataset_name}")
         outputs_per_dataset = evaluate_output(dataset_name, outputs_per_dataset, llm, batch_size, retry_count)
         outputs_per_dataset.to_csv(f"../model_struct_output/{data_path}/{dataset_name}.csv", index=False)
 

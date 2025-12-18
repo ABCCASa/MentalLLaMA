@@ -82,12 +82,12 @@ def evaluate_output(dataset_name, output_df):
     result_dict.update(our_metrics.evaluate_all(golden_label_index, output_label_index))
     result_dict["OOD_count"] = count
 
-    #bert_P, bert_R, bert_F1 = score(output_response, golden_response, lang="en")  # lang 改成对应语言
+    bert_P, bert_R, bert_F1 = score(output_response, golden_response, lang="en")  # lang 改成对应语言
 
 
-    #result_dict["bert_P"] = round(bert_P.mean().item()*100,3)
-    #result_dict["bert_R"] = round(bert_R.mean().item()*100,3)
-    #result_dict["bert_F1"] = round(bert_F1.mean().item()*100,3)
+    result_dict["bert_P"] = round(bert_P.mean().item()*100,3)
+    result_dict["bert_R"] = round(bert_R.mean().item()*100,3)
+    result_dict["bert_F1"] = round(bert_F1.mean().item()*100,3)
 
     bleu = evaluate.load("bleu")
     bleu_result = bleu.compute(predictions=output_response, references=golden_response)['bleu']
@@ -113,4 +113,6 @@ def main(output_path: str):
 
 if __name__ == "__main__":
     #main("Llama-3.1-8B_few_shot", "meta-llama/Llama-3.1-8B-Instruct")
-    main("bert_llm2_zero_shot_cot_label")
+    for file in os.listdir("../model_output"):
+        print(f"【{file}】")
+        main(file)

@@ -15,9 +15,6 @@ class LLM:
         if self.model.generation_config is not None and self.model.generation_config.pad_token_id is None:
             self.model.generation_config.pad_token_id = self.tokenizer.pad_token_id
 
-
-
-
     def call_llm_with_text(self, text: str, max_length) -> str:
         response = self.call_llm([{"role": "user", "content": text}], max_length)
         return response
@@ -66,50 +63,51 @@ class LLM:
                     output += f"{e}\n"
             return False, output
 
-
-    def batch_structured_output(self, contents, max_length, structure: Type[BaseModel], batch_size, retry_count=0, print_fre = 1):
+    def batch_structured_output(self, contents, max_length, structure: Type[BaseModel], batch_size, retry_count=0, print_fre = 5):
         output = [None]*len(contents)
-        content_i = 0
-        message_batch = []
-        while True:
-            while len(message_batch)<batch_size and content_i < len(contents):
-                content = contents[content_i]
-                query = (
-                    f"Try to extract and summary the information from user provided content and convert them into JSON that matches the given schema:\n"
-                    f"```json\n{json.dumps(structure.model_json_schema())}\n```. \n"
-                    f"Make sure to wrap the answer in ```json and ``` tags.\n"
-                    f"Content:\n {content}")
-                message_batch.append([content_i, [{"role": "user", "content": query}], 0])
-                content_i+=1
-            if len(message_batch) <=0:
-                return output
+        counts = [-1]*len(contents)
+        # build init prompt
+        all_messages = []
+        for content_i in range(len(contents)):
+            content = contents[content_i]
+            query = (
+                f"Try to extract and summary the information from user provided content and convert them into JSON that matches the given schema:\n"
+                f"```json\n{json.dumps(structure.model_json_schema())}\n```. \n"
+                f"Make sure to wrap the answer in ```json and ``` tags.\n"
+                f"Content:\n {content}")
+            all_messages.append([content_i, [{"role": "user", "content": query}], 0])
 
-            responses = self.call_llm_batch([m[1] for m in message_batch], max_length)
-            for i in range(len(responses) - 1, -1, -1):
-                response = responses[i]
-                messages = message_batch[i][1]
-                messages.append({"role": "assistant", "content": response})
-                valid, data = self.structured_valid(response, structure)
-                content_id = message_batch[i][0]
-                if valid:
-                    if content_id % print_fre == 0:
-                        current_retry_count = message_batch[i][2]
-                        print(f"{content_id}/{len(contents)}")
-                        print(f"[response]{contents[content_id]}")
-                        print(f"[json:{current_retry_count}]{data}\n")
-                    output[content_id] = data
-                    message_batch.pop(i)
-                else:
-                    new_query = f"Failed to extract JSON output, Exception: {data}\n Please retry again."
-                    messages.append({"role": "user", "content": new_query})
-                    current_retry_count = message_batch[i][2]
-                    current_retry_count += 1
+        for try_count in range(retry_count+1):
+            retry_messages = []
+            for batch_index in range(0, len(all_messages), batch_size):
+                message_batch = all_messages[batch_index: min(batch_index + batch_size, len(all_messages))]
+                responses = self.call_llm_batch([m[1] for m in message_batch], max_length)
 
-                    if current_retry_count < retry_count:
-                        message_batch[i][2] = current_retry_count
+                # validate
+                for i in range(len(responses) - 1, -1, -1):
+                    response = responses[i]
+                    message_and_id = message_batch[i]
+                    content_id = message_and_id[0]
+                    messages = message_and_id[1]
+                    messages.append({"role": "assistant", "content": response})
+                    valid, data = self.structured_valid(response, structure)
+                    if valid:
+                        output[content_id] = data
+                        counts[content_id] = try_count+1
+                        if batch_index% (print_fre * batch_size) == 0 and i == 0:
+                            print(f"[retry: {try_count}, i: {batch_index}/{len(all_messages)}]")
+                            print(f"[query]{contents[content_id].strip()}")
+                            print(f"[json]{output[content_id]}\n")
                     else:
-                        message_batch.pop(i)
-                        if content_id % print_fre == 0:
-                            print(f"{content_id}/{len(contents)}")
-                            print(f"[response]{contents[content_id]}")
-                            print(f"[error]{data}")
+                        new_query = f"Failed to extract JSON output, Exception: {data}\n Please retry again."
+                        messages.append({"role": "user", "content": new_query})
+                        retry_messages.append(message_and_id)
+                        if batch_index % (print_fre * batch_size) == 0 and i == 0:
+                            print(f"[retry: {try_count}, i: {batch_index}/{len(all_messages)}]")
+                            print(f"[query]{contents[content_id].strip()}")
+                            print(f"[error]{data.strip()}\n")
+
+            all_messages = retry_messages
+
+        print(len(all_messages),"data fail to structure")
+        return output, counts
